@@ -5,12 +5,15 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        min : 5, 
+        max : 100
     },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        min : 8,
+        max : 355
     },
     password: {
         type: String,
@@ -20,10 +23,41 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['student', 'instructor','admin']
+    },
+    profile_picture :{
+        type: String,
+        default: 'https://www.khalqfoundation.org/assets/images/default.png' 
+    },
+    date : {
+        type : Date,
+        default : Date.now
+    },
+                                   
+    //(e.g., Programming, Mathematics, Biology)
+    expertise :{
+        type : String,
+        required : function (){
+            return this.role === 'instructor'
+        }
+    },
+    
+    bio : {
+        type : String,
+        required : function (){
+            return this.role === 'instructor'
+        }
+    },
+    isApproved: {
+        type: Boolean,
+        default: false, // New users are not approved by default
+        required : function (){
+            return this.role === 'instructor'
+        }
     }
+
 });
 
 // Create a User model
-const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
+
