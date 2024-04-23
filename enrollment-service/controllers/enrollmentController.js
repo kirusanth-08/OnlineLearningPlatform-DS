@@ -1,7 +1,7 @@
 const Enrollment = require('../models/enrollment');
 
 const enrollmentController = {
-    createEnrollment: async (req, res) => {
+    enrollCourse: async (req, res) => {
         try {
             const enrollment = new Enrollment(req.body);
             await enrollment.save();
@@ -20,28 +20,28 @@ const enrollmentController = {
         }
     },
 
-    getEnrollment: async (req, res) => {
+    getEnrolledStudents: async (req, res) => {
         try {
-            const enrollment = await Enrollment.findById(req.params.id);
-            if (enrollment == null) {
-                return res.status(404).json({ message: 'Cannot find enrollment' });
-            }
-            res.json(enrollment);
+            const enrollments = await Enrollment.find({ courseId: req.params.courseId });
+            const studentIds = enrollments.map(enrollment => enrollment.user_id);
+            res.json(studentIds);
         } catch (error) {
-            return res.status(500).json({ message: error.message });
+            res.status(500).json({ message: error.message });
         }
     },
 
-    updateEnrollment: async (req, res) => {
+    getEnrolledCourses: async (req, res) => {
         try {
-            const updatedEnrollment = await Enrollment.findByIdAndUpdate(req.params.id, req.body, { new: true });
-            res.json(updatedEnrollment);
+            const enrollments = await Enrollment.find({ user_id: req.body.userId });
+            const courseIds = enrollments.map(enrollment => enrollment.course_id);
+            res.json(courseIds);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            res.status(500).json({ message: error.message });
         }
     },
+    
 
-    deleteEnrollment: async (req, res) => {
+    unEnrollCourse: async (req, res) => {
         try {
             await Enrollment.findByIdAndDelete(req.params.id);
             res.json({ message: 'Deleted Enrollment' });
@@ -49,6 +49,16 @@ const enrollmentController = {
             res.status(500).json({ message: error.message });
         }
     }
+
+//     enrolledCourses: async (req, res) => {
+//     try {
+//         const enrollments = await Enrollment.find({ user_id: req.params.studentId });
+//         const courseIds = enrollments.map(enrollment => enrollment.course_id);
+//         res.json(courseIds);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// }
 };
 
 module.exports = enrollmentController;
