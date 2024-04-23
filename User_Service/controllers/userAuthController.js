@@ -81,6 +81,29 @@ const userAuthController = {
     
         // Redirect the user to the login page or send a response indicating successful logout
         res.send("You are logged out");
+    },
+
+    authenticate : async(req,res)=>{
+         
+            try {
+                // Extract token from request header or cookies
+                const token = req.header('auth-token') || req.cookies['auth-token'];
+    
+                // If token doesn't exist, user is not authenticated
+                if (!token) {
+                    return res.status(401).json({ message: 'Access denied, authentication token missing' });
+                }
+    
+                // Verify the token
+                const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+    
+                // Token verification successful, user is authenticated
+                res.status(200).json({ message: 'User authenticated successfully', user_id: decodedToken._id });
+            } catch (error) {
+                // Token verification failed, user is not authenticated
+                res.status(401).json({ message: 'Access denied, invalid authentication token' });
+            }
+        
     }
     
 }
