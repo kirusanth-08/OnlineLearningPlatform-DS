@@ -4,9 +4,11 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const enrollmentRoutes = require('./routes/enrollmentRoutes'); // Assuming routes are in a 'routes' directory
 const app = express();
-const port = 3000;
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/enrollmentDB', { useNewUrlParser: true, useUnifiedTopology: true })
+const port = process.env.PORT || 3000;
+
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Database connected successfully'))
     .catch(err => console.log(err));
 
