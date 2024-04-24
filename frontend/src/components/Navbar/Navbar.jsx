@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './Navbar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
-  const [user, setUser] = useState(null); // Replace this with your actual user state/context
+  const [user, setUser] = useState("f"); // Replace this with your actual user state/context
 
   return (
     <div className='navbar'>
@@ -15,27 +18,34 @@ const Navbar = () => {
                 <button>Search</button>
             </div>
             <div className='navbar-main__links'>
-                    <a href="#">Home</a>
                     <a href="#">About</a>
-                    <a href="#">Services</a>
                     <a href="#">Contact</a>
             </div>
             <div className='navbar-main__cta'>
                 {user ? (
-                    <a href="#" className='btn'>Profile</a>
+                    <div>
+                        <a href="#" className='notifications'>
+                            <FontAwesomeIcon icon={faBell} />
+                        </a>
+                        <a href="#" className='profile'>
+                            Profile <FontAwesomeIcon icon={faCaretDown} />
+                            </a>
+                    </div>
                 ) : (
                     <a href="#" className='btn'>Get Started</a>
                 )}
             </div>
         </div>
-        <div className='navbar-user'>
-                <div className='navbar-user__links'>
-                    <a href="#">My Learnings</a>
-                    <a href="#">Settings</a>
-                    <a href="#">Logout</a>
+            {user ? (
+                <div className='navbar-user'>
+                    <div className='navbar-user__links'>
+                        <a href="#">Home</a>
+                        <a href="#">My Learning</a>
+                    </div>
                 </div>
-            
-        </div>
+            ) : (
+                <></>
+            )}
     </div>
   )
 }

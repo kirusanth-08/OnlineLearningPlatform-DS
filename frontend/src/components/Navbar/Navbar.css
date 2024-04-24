@@ -1,10 +1,12 @@
 .navbar {
     width: 100%;
-    position: fixed;
     display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.193);
+    margin-top: 60px;
 }
 
 .navbar-main {
+    position: fixed;
     width: 100%;
     height: 60px;
     top: 0;
@@ -12,7 +14,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 60px;
+    padding: 0 0 0 60px;
+    background: white;
 }
 
 .navbar-main__logo {
@@ -22,13 +25,49 @@
 
 .navbar-main__links {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
     width: 30%;
 }
 
+.navbar-main__links a {
+    padding: 20px 20px;
+    transition: all 0.6s ease;
+}
+
+.navbar-main__links a:hover {
+    background-color: rgba(157, 198, 255, 0.608);
+}
+
+.navbar-main__cta {
+    /* background-color: antiquewhite; */
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 15%;
+}
+
+.navbar-main__cta .notifications {
+    padding: 7px 10px;
+    /* color: white; */
+    border-radius: 5px;
+    border: 1px rgba(0, 0, 0, 0.319) solid;
+    /* background-color: rgb(0, 113, 233); */
+}
+
+.navbar-main__cta .profile {
+    margin: 0 20px;
+    padding: 7px 10px;
+    /* color: white; */
+    border-radius: 5px;
+    border: 1px rgba(0, 0, 0, 0.319) solid;
+    /* background-color: rgb(0, 113, 233); */
+}
+
 .navbar-main__cta .btn {
-    padding: 10px 10px;
+    margin: 0 20px;
+    padding: 7px 10px;
     color: white;
     border-radius: 5px;
     background-color: rgb(0, 113, 233);
@@ -57,6 +96,8 @@
 
 /*//////////Navbar-user//////// */
 .navbar-user {
+    position: fixed;
+    padding: 0 30px;
     background-color: rgb(0, 72, 181);
     color: white;
     width: 100%;
@@ -71,4 +112,10 @@
 
 .navbar-user .navbar-user__links a {
     padding: 5px 10px;
+}
+
+
+
+.navbar-user .navbar-user__links a:hover {
+    background-color: rgba(23, 81, 255, 0.314);
 }
