@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
 const courseContentSchema = new mongoose.Schema({
-     
+    
+    instructor_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Referencing the User model
+        required: true
+    },
     topic: {
         type: String,
         required: true
@@ -14,7 +19,10 @@ const courseContentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course', // Referencing the Course model
         required: true
-    } 
+    },
+    video : {
+        type: String
+    }
      
 });
 
