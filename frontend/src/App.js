@@ -1,15 +1,19 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Navbar from './Learner/components/Navbar/Navbar';
-import ContinueLearning from './Learner/components/ContinueLearning/ContinueLearning';
 import Dashboard from './Instructor/pages/Dashboard';
+import Sidebar from './Instructor/components/Sidebar/Sidebar';
 
 function App() {
   return (
-    <div className="App">
-      {/* <Navbar />
-      <ContinueLearning /> */}
-      <Dashboard />
-    </div>
+    <Router>
+      <div className="App">
+        <Sidebar />
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
