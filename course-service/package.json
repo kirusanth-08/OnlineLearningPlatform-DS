@@ -12,6 +12,7 @@
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "kafka-node": "^5.0.0",
     "mongoose": "^8.3.2"
   },
   "devDependencies": {

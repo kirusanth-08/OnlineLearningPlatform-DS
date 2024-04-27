@@ -5,7 +5,7 @@ const courseContentSchema = new mongoose.Schema({
     instructor_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User', // Referencing the User model
-        required: true
+                
     },
     topic: {
         type: String,
