@@ -1,7 +1,8 @@
-const { model } = require('mongoose'); 
+const { model } = require('mongoose');
 const Course = require('../models/Course')
-const courseController ={
-    createCourse : async(req,res)=>{
+const courseController = {
+    createCourse: async (req, res) => {
+        
         try {
              
             const { title, description, instructor_id, price, start_date} = req.body;
@@ -24,29 +25,29 @@ const courseController ={
             console.error('Error creating course:', error);
             res.status(500).json({ error: 'Internal server error' });
         }
-        
+  
     },
-    updateCourse : async(req,res)=>{
+    updateCourse: async (req, res) => {
         try {
-            const courseId = req.params.id; 
+            const courseId = req.params.id;
             const { title, description, instructor_id, price, start_date } = req.body;
- 
+
             let course = await Course.findById(courseId);
 
-          
+
             if (!course) {
                 return res.status(404).json({ error: 'Course not found' });
             }
 
-             
+
             course.title = title;
             course.description = description;
             course.instructor_id = instructor_id;
             course.price = price;
             course.start_date = start_date;
-            
 
-            
+
+
             await course.save();
 
             res.status(200).json({ message: 'Course updated successfully', course });
@@ -54,13 +55,13 @@ const courseController ={
             console.error('Error updating course:', error);
             res.status(500).json({ error: 'Internal server error' });
         }
-    
+
     },
-    deleteCourse : async(req,res)=>{
+    deleteCourse: async (req, res) => {
         try {
             const courseId = req.params.id;
 
-           
+
             const deletedCourse = await Course.findByIdAndDelete(courseId);
 
             if (!deletedCourse) {
@@ -73,9 +74,9 @@ const courseController ={
             res.status(500).json({ error: 'Internal server error' });
         }
     },
-    viewAllCourse : async(req,res)=>{
+    viewAllCourse: async (req, res) => {
         try {
-           
+
             const courses = await Course.find();
 
             res.status(200).json({ courses });
@@ -84,11 +85,11 @@ const courseController ={
             res.status(500).json({ error: 'Internal server error' });
         }
     },
-    viewCourse : async(req,res)=>{
+    viewCourse: async (req, res) => {
         try {
             const courseId = req.params.id;
 
-            
+
             const course = await Course.findById(courseId);
 
             if (!course) {

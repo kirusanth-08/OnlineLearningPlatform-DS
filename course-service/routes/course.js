@@ -7,4 +7,4 @@ router.delete('/delete/:id',courseController.deleteCourse)
 router.get('/viewAll',courseController.viewAllCourse)
 router.get('/:id',courseController.viewCourse)
 
-module.exports = router
+module.exports = router 
