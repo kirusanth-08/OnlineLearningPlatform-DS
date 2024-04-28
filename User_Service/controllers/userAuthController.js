@@ -11,7 +11,7 @@ const userAuthController = {
 
        //checking if the user already in database
        const emailExist = await User.findOne({email : req.body.email})
-       if(emailExist) return res.status(400).send('email already exist')
+       if(emailExist) return res.json({error : 'email already exist'})
 
        // hash the password 
        const salt = await bcrypt.genSalt(10)
@@ -50,11 +50,11 @@ const userAuthController = {
 
         //checking if the user already in database
        const user = await User.findOne({email : req.body.email})
-       if(!user) return res.status(400).send('Email is not found') 
+       if(!user) return res.json({error : 'Email is not found'}) 
 
         // Check if the password is correct
         const validPassword = await bcrypt.compare(req.body.password, user.password);
-        if(!validPassword) return res.status(400).send('Invalid password');
+        if(!validPassword) return res.json({error : 'Invalid password'});
         
 
          
@@ -63,12 +63,12 @@ const userAuthController = {
         const token = jwt.sign({_id : user._id},process.env.TOKEN_SECRET)
         //res.header('auth-token',token)
         // Set token in a cookie////////////////////////////////////////////////////////////////////////////////
-        res.cookie('auth-token', token, {
+        res.cookie('authtoken', token, {
         httpOnly: true,
         expires: new Date(Date.now() +  5 * 60 * 1000), // Set expiry time to 10 minutes from now
     });
 
-        res.send("Success! You are logged in");
+        res.send(token);
     },
 
 
@@ -87,7 +87,7 @@ const userAuthController = {
          
             try {
                 // Extract token from request header or cookies
-                const token = req.header('auth-token') || req.cookies['auth-token'];
+                const token = req.header('authtoken') || req.cookies['authtoken'];
     
                 // If token doesn't exist, user is not authenticated
                 if (!token) {
@@ -98,7 +98,7 @@ const userAuthController = {
                 const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
     
                 // Token verification successful, user is authenticated
-                res.status(200).json({ message: 'User authenticated successfully', user_id: decodedToken._id });
+                res.status(200).json({ message: 'User authenticated successfully', user : req.user});
             } catch (error) {
                 // Token verification failed, user is not authenticated
                 res.status(401).json({ message: 'Access denied, invalid authentication token' });
