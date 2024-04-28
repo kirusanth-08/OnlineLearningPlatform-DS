@@ -6,10 +6,10 @@ const registerValidation =(data)=>{
         username: Joi.string().min(5).max(100).required(),
         email: Joi.string().email().required(),
         password: Joi.string().required(),
-        role: Joi.string().valid('student', 'instructor', 'admin').required(),
+        // role: Joi.string().valid('student', 'instructor', 'admin').required(),
         profile_picture: Joi.string(),
-        expertise: Joi.string().when('role', { is: 'instructor', then: Joi.required() }),
-        bio: Joi.string().when('role', { is: 'instructor', then: Joi.required() })
+        // expertise: Joi.string().when('role', { is: 'instructor', then: Joi.required() }),
+        // bio: Joi.string().when('role', { is: 'instructor', then: Joi.required() })
     
     }
 
@@ -20,6 +20,7 @@ const loginValidation =(data)=>{
     const schema = {
         email: Joi.string().email().required(),
         password: Joi.string().required()
+        
         
         
     

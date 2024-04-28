@@ -5,7 +5,7 @@ const User = require('../models/User')
 module.exports = async function (req,res,next){
     // const token  = req.header('auth-token')
      // Check if the auth-token cookie is present///////////////////////////////////////////////////////
-     const token = req.cookies['auth-token'];
+     const token = req.cookies['authtoken'];
      if(!token) return res.status(401).send('Access denied, login again')
  
      try{
@@ -13,6 +13,6 @@ module.exports = async function (req,res,next){
          req.user =  await User.findById(verified._id)
          next()
      }catch(err){
-         res.status(400).send('Invalid token')
+         res.status(400).json({error : 'Invalid tokennnnn'})
      }
  }
