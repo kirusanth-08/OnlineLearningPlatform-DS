@@ -2,7 +2,8 @@ import React from 'react'
 import './Dashboard.css'
 
 /*icons */
-import { PiStudent } from "react-icons/pi";
+import { MdSchool } from "react-icons/md";
+import { FaChalkboardTeacher } from "react-icons/fa";
 
 
 const Dashboard = () => {
@@ -14,7 +15,22 @@ const Dashboard = () => {
         <div className='dashboard-stats'>
           <div className='stat'>
             <h3>Students</h3>
-            <PiStudent className='stat-icon'/>
+            <MdSchool className='stat-icon'/>
+            <p>10</p>
+          </div>
+          <div className='stat'>
+            <h3>Your courses</h3>
+            <FaChalkboardTeacher className='stat-icon'/>
+            <p>10</p>
+          </div>
+          <div className='stat'>
+            <h3>Today Enrolled Stdents</h3>
+            <MdSchool className='stat-icon'/>
+            <p>10</p>
+          </div>
+          <div className='stat'>
+            <h3>Students</h3>
+            <MdSchool className='stat-icon'/>
             <p>10</p>
           </div>
         </div>
