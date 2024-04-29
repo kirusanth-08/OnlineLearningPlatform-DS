@@ -1,6 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Sidebar.css';
+
+import { MdDashboard } from "react-icons/md";
+import { MdSchool } from "react-icons/md";
+import { MdPeople } from "react-icons/md";
+import { MdSettings } from "react-icons/md";
+import { MdExitToApp } from "react-icons/md";
 
 const Sidebar = () => {
   return (
@@ -8,16 +14,14 @@ const Sidebar = () => {
       <div className='logo'>Alright</div>
       <div className='sidebar-elements'>
         <div className='nav-links'>
-            <div className='nav-links__header'>Overview</div>
-            <Link to='/dashboard'>Dashboard</Link>
-            <Link to='/courses'>Courses</Link>
-            <Link to='/students'>Students</Link>
+            <NavLink to='/dashboard' activeClassName='active-link'><MdDashboard className='sidebar-icon' />Dashboard</NavLink>
+            <NavLink to='/courses' activeClassName='active-link'><MdSchool  className='sidebar-icon' />Courses</NavLink>
+            <NavLink to='/students' activeClassName='active-link'><MdPeople  className='sidebar-icon' />Students</NavLink>
         </div>
 
         <div className='nav-settings'>
-            <div className='nav-settings__header'>Settings</div>
-            <Link to='/settings'>Settings</Link>
-            <Link to='/logout'>Logout</Link>
+            <NavLink to='/settings' activeClassName='active-link'><MdSettings className='sidebar-icon' />Settings</NavLink>
+            <NavLink to='/logout' activeClassName='active-link'><MdExitToApp className='sidebar-icon' />Logout</NavLink>
         </div>
       </div>
     </div>
