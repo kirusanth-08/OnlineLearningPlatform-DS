@@ -43,3 +43,20 @@
     font-size: 0.8rem;
     padding: 5px;
 }
+
+.course-details .edit-course {
+    background-color: #f0ad4e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.course-details .edit-course:hover {
+    background-color: #ec971f;
+}

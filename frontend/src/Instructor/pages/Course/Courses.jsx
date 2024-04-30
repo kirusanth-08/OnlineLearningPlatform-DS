@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './Courses.css'
 
 const Courses = () => {
@@ -14,6 +15,7 @@ const Courses = () => {
                     <h3>Web Development</h3>
                     <p>Learn Web Development from scratch</p>
                     <button className='view-course'>View Course</button>
+                    <Link to="/courses/modify" className='edit-course'>Edit Course</Link>
                 </div>
             </div>
         </div>
