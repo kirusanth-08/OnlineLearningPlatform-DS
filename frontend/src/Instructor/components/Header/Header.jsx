@@ -12,10 +12,10 @@ const Header = () => {
               <MdNotifications className='bell'/>
               <div className='notification-count'>3</div>
             </a>
-            <div className='profile'>
+            <a href='#' className='profile'>
                 <img src='https://i0.wp.com/www.muscleandfitness.com/wp-content/uploads/2023/11/Bodybuilder-and-2023-Classic-Physique-Winner-Chris-Bumstead-posing-on-stage-at-the-2023-Olympia-Competition.jpg?quality=86&strip=all' />
                 <div className='profile-name'>Kirusanth</div>
-            </div>
+            </a>
         </div>
     </div>
   )

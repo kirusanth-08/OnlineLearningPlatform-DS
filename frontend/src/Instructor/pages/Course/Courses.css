@@ -1,0 +1,45 @@
+.courses-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.course {
+    border-radius: 10px;
+    background-color: aliceblue;
+    width: 60%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16);
+}
+
+.course .course-details {
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.course-details .view-course {
+    background-color: #2e82cc;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    position: absolute;
+    margin: 10px;
+    bottom: 0;
+    right: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.course .course-status {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    font-size: 0.8rem;
+    padding: 5px;
+}

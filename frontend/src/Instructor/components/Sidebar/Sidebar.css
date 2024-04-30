@@ -8,6 +8,7 @@
     /* justify-content: space-between; */
     align-items: center;
     box-shadow: 3px 0 35.16px rgba(0, 0, 0, 0.2);
+    min-width: 170px;
 }
 
 .sidebar .logo {

@@ -3,3 +3,14 @@
   max-height: 100vh;
 }
 
+.content-container {
+  width: 82%;
+  border-radius: 10px;
+  background-color: aliceblue;
+  height: 87vh;
+  position: relative;
+  top: 12vh;
+  left: 17%;
+  box-shadow: 3px 0 35.16px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+}
