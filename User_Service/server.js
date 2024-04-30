@@ -3,13 +3,14 @@ const mongoose = require('mongoose')
 const app = express()
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
 dotenv.config();
 
 const http = require('http');
 const {Server} = require('socket.io'); // Import Socket.IO
 const server = http.createServer(app)
-const cors = require('cors')
-app.use(cors())
+
+
 const io = new Server(server,{
     cors : {
         origin : 'http://localhost:3000',
@@ -33,7 +34,7 @@ con.on('open',()=>{
 app.use(cookieParser());
 //Middelware 
 app.use(express.json())
-
+app.use(cors())
 
 //routes middlewares
 app.use('/api/user',authRoute)

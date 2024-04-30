@@ -37,8 +37,14 @@ const Login = () => {
 
         }else{
           console.log(res.data)
-            localStorage.setItem('authtoken', res.data)
-            setAuthstate(true)
+            localStorage.setItem('authtoken', res.data.token)
+          
+            setAuthstate({
+              username :res.data.username,
+              id :res.data.id,
+              instructor:res.data.instructor,
+              status : true
+            })
             navigate('/courses')
         }
        })

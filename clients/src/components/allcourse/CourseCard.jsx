@@ -1,31 +1,50 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./courses.css"
-import { coursesCard } from "../../dummydata"
+//import { coursesCard } from "../../dummydata"
 import {  useNavigate } from 'react-router-dom'
 import { AuthContext } from '../helpers/AuthContext'
+import axios from 'axios'
+
  /////////////////////////////////////////////////////////
 const CourseCard = () => {
   const navigate = useNavigate()
   const {authState} = useContext(AuthContext)
+  const [courses , setCourses] = useState([])
   const click = ()=>{
     //{!authState == '' ? navigate('/about') : navigate('/login')  }
-    {authState ? navigate('/about') : navigate('/login')  }
+    {authState.status ? navigate('/about') : navigate('/login')  }
     
   }
+ 
+  useEffect(()=>{
+    const fetchCourses = ()=>{
+         
+          axios.get('http://localhost:8082/api/course/viewAll')
+          .then((res)=>{
+              setCourses(res.data.course)
+               
+          }).catch((err)=>{
+            console.error('Error fetching courses:', err);
+          })
+           
+    }
+    fetchCourses();
+  },[]);
+  
   return (
     <>
       <section className='coursesCard'>
         <div className='container grid2'>
-          {coursesCard.map((val) => (
-            <div className='items'>
+          {courses.map((val) => (
+            <div className='items'key={val._id}>
               <div className='content flex'>
                 <div className='left'>
                   <div className='img'>
-                    <img src={val.cover} alt='' />
+                    <img src="../images/courses/c2.png" alt='' />
                   </div>
                 </div>
                 <div className='text'>
-                  <h1>{val.coursesName}</h1>
+                  <h1>{val.title}</h1>
                   <div className='rate'>
                     <i className='fa fa-star'></i>
                     <i className='fa fa-star'></i>
@@ -35,25 +54,25 @@ const CourseCard = () => {
                     <label htmlFor=''>(5.0)</label>
                   </div>
                   <div className='details'>
-                    {val.courTeacher.map((details) => (
+                     
                       <>
                         <div className='box'>
                           <div className='dimg'>
-                            <img src={details.dcover} alt='' />
+                            <img src={val.instructor_id.profile_picture} alt='' />
                           </div>
                           <div className='para'>
-                            <h4>{details.name}</h4>
+                            <h4>{val.instructor_id.username}</h4>
                           </div>
                         </div>
-                        <span>{details.totalTime}</span>
+                        <span>{val.duration} hours course</span>
                       </>
-                    ))}
+                     
                   </div>
                 </div>
               </div>
               <div className='price'>
                 <h3>
-                  {val.priceAll} / {val.pricePer}
+                  ${val.priceAll} / ${val.pricePer}
                 </h3>
               </div>
               <button className='outline-btn' onClick={click}>

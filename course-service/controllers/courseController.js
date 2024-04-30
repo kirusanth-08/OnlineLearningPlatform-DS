@@ -5,17 +5,19 @@ const courseController = {
         
         try {
              
-            const { title, description, instructor_id, price, start_date} = req.body;
+            const { title, description, instructor_id, priceAll, pricePer,dcover,name} = req.body;
 
         
             const newCourse = new Course({
                 title,
                 description,
                 instructor_id,
-                price,
-                start_date
+                priceAll,
+                pricePer,
+                 
                 
             });
+
 
              
             await newCourse.save();
@@ -79,7 +81,7 @@ const courseController = {
 
             const courses = await Course.find();
 
-            res.status(200).json({ courses });
+            res.json({ course : courses });
         } catch (error) {
             console.error('Error fetching courses:', error);
             res.status(500).json({ error: 'Internal server error' });
@@ -93,10 +95,10 @@ const courseController = {
             const course = await Course.findById(courseId);
 
             if (!course) {
-                return res.status(404).json({ error: 'Course not found' });
+                return res.json({ error: 'Course not found' });
             }
 
-            res.status(200).json({ course });
+            res.json({ course });
         } catch (error) {
             console.error('Error fetching course:', error);
             res.status(500).json({ error: 'Internal server error' });

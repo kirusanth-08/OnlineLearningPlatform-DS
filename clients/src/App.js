@@ -14,20 +14,42 @@ import Signup from './components/login/Signup';
 import {AuthContext} from './components/helpers/AuthContext'
 //////////////////////////////////////////////////////////////////////
 import { useEffect, useState } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
   function App() {
 
-    const [authState , setAuthstate] = useState(false)
+    const [authState , setAuthstate] = useState({
+      username : '',
+      id : '',
+      instructor:false,
+      status : false
+    })
     useEffect(()=>{
-      // axios.get('http://localhost:8080/api/user/authenticate',{
-      //   headers : {
-      //     authtoken : localStorage.getItem('authtoken')
-      //   },
-      // })
-      const auth = localStorage.getItem("authtoken")
-      if(auth){
-        setAuthstate(true) 
-      }
+      axios.get('http://localhost:8080/api/user/authenticate',{
+        headers : {
+          authtoken : localStorage.getItem('authtoken')
+        },
+      }).then((res)=>{
+          if(res.data.error){
+            alert(res.data.error)
+            setAuthstate({...authState,status : false})
+          }else{
+            setAuthstate(
+              {
+                username : res.data.username,
+                id :res.data._id,
+                instructor: res.data.instructor,
+                status : true
+              }
+             
+            )
+          }
+      }).catch((err)=>{
+        console.log(err)
+      })
+      // const auth = localStorage.getItem("authtoken")
+      // if(auth){
+      //   setAuthstate(true) 
+      // }
        
     },[])
     return (
