@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Head from './Head'
 import './Header.css'
 import  {Link} from 'react-router-dom'
+import { AuthContext } from '../../helpers/AuthContext'
 
 const Header = () => {
     const [click , setClick] = useState(false)
+
+    const {authState} = useContext(AuthContext)
+    
   return (
     <>
       <Head/>
@@ -25,7 +29,12 @@ const Header = () => {
             </li>
           </ul>
           <div className='start'>
-            <div className='button'>GET COURS</div>
+            {!authState.status ? 
+            <div className='button'>GET COURSE</div> 
+                            : 
+            <div className='button' style={{ textTransform: 'uppercase' }}>{authState.username}</div>
+          }
+            
           </div>
           
           <button className='toggle' onClick={() => setClick(!click)}>

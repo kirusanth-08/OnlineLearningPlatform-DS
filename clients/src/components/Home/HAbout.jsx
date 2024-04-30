@@ -10,7 +10,7 @@ const HAbout = () => {
   const navigate = useNavigate()
   const {authState} = useContext(AuthContext)
   const handleClick = () => {
-   {authState? navigate('/courses') : navigate('/login') }
+   {authState.status ? navigate('/courses') : navigate('/login') }
     
   }
   return (

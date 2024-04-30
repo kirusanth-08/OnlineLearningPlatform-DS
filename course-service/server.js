@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express() 
 const dotenv = require('dotenv')
+const cors = require('cors')
 dotenv.config();
 
 const courseRoute = require('./routes/course')
@@ -16,6 +17,8 @@ con.on('open',()=>{
 
 //Middelware 
 app.use(express.json())
+// Use CORS middleware
+app.use(cors());
 //course route 
 app.use('/api/course',courseRoute)
 //course_content route 

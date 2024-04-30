@@ -10,19 +10,40 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // instructor_id: {
+       
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User', // Referencing the User model
+    //     required: true
+    // },
     instructor_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Referencing the User model
-        required: true
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User', // Assuming there's a User model
+            required: true
+        },
+        username: {
+            type: String,
+            required: true
+        },
+        profile_picture: {
+            type: String,
+            required: true
+        }
     },
-    price: {
+    priceAll: {
         type: Number,
         required: true
     },
-    start_date: {
-        type: Date,
+    pricePer: {
+        type: Number,
         required: true
-    } 
+    },
+    duration:{
+        type: Number,
+        required: true
+    }
+     
 });
 
 module.exports = mongoose.model('Course', courseSchema);

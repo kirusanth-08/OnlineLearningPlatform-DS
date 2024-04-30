@@ -44,13 +44,13 @@ export const awrapper = [
 export const coursesCard = [
   {
     id: 1,
-    cover: "../images/courses/c1.png",
+    // cover: "../images/courses/c1.png",
     coursesName: "Introducing to Software Engineering",
     courTeacher: [
       {
         dcover: "./images/back.webp",
         name: "by John Smith",
-        totalTime: "50 lectures (190 hrs)",
+        // totalTime: "50 lectures (190 hrs)",
       },
     ],
     priceAll: "$100 All Course",

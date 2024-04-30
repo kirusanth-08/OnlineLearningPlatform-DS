@@ -5,7 +5,12 @@ const Head = () => {
     const {authState ,setAuthstate} = useContext(AuthContext)
     const logout =()=>{
         localStorage.removeItem('authtoken')
-        setAuthstate('')
+        setAuthstate({
+            username : '',
+            id : '',
+            instructor:false,
+            status : false
+          })
     }
 
     return (
@@ -24,7 +29,7 @@ const Head = () => {
                         <i className='fab fa-twitter icon'></i>
                         <i className='fab fa-youtube icon'></i>
 
-                        {!authState == '' && 
+                        {!authState.status == '' && 
                         <span className="logout-button" >
                         <Link to= '' style={{color : 'white'}}>
                         <i className='fas fa-sign-out-alt logout-icon' style={{fontSize : '25px'}} onClick={logout}></i>
