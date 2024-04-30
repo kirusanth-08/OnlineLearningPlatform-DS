@@ -8,7 +8,7 @@ import * as yup from 'yup'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../helpers/AuthContext'
-
+///////////////////////////////////////////////////////////////////
 const Login = () => {
 
     const {setAuthstate} = useContext(AuthContext)
@@ -38,7 +38,7 @@ const Login = () => {
         }else{
           console.log(res.data)
             localStorage.setItem('authtoken', res.data)
-            setAuthstate(res.data)
+            setAuthstate(true)
             navigate('/courses')
         }
        })

@@ -3,12 +3,13 @@ import "./courses.css"
 import { coursesCard } from "../../dummydata"
 import {  useNavigate } from 'react-router-dom'
 import { AuthContext } from '../helpers/AuthContext'
- 
+ /////////////////////////////////////////////////////////
 const CourseCard = () => {
   const navigate = useNavigate()
   const {authState} = useContext(AuthContext)
   const click = ()=>{
-    {!authState == '' ? navigate('/about') : navigate('/login')  }
+    //{!authState == '' ? navigate('/about') : navigate('/login')  }
+    {authState ? navigate('/about') : navigate('/login')  }
     
   }
   return (

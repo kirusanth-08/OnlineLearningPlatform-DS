@@ -61,12 +61,12 @@ const userAuthController = {
 
         //create and assign a tokken 
         const token = jwt.sign({_id : user._id},process.env.TOKEN_SECRET)
-        //res.header('auth-token',token)
+        res.header('authtoken',token)
         // Set token in a cookie////////////////////////////////////////////////////////////////////////////////
-        res.cookie('authtoken', token, {
-        httpOnly: true,
-        expires: new Date(Date.now() +  5 * 60 * 1000), // Set expiry time to 10 minutes from now
-    });
+    //     res.cookie('authtoken', token, {
+    //     httpOnly: true,
+    //     expires: new Date(Date.now() +  5 * 60 * 1000), // Set expiry time to 10 minutes from now
+    // });
 
         res.send(token);
     },
@@ -77,10 +77,13 @@ const userAuthController = {
 
     logoutUser: async (req, res) => {
         // Clear the authentication token cookie
-        res.clearCookie('auth-token');
+        res.clearCookie('authtoken');
     
         // Redirect the user to the login page or send a response indicating successful logout
         res.send("You are logged out");
+    },
+    auth : {
+       
     },
 
     authenticate : async(req,res)=>{
@@ -98,12 +101,12 @@ const userAuthController = {
                 const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
     
                 // Token verification successful, user is authenticated
-                res.status(200).json({ message: 'User authenticated successfully', user : req.user});
+                res.status(200).json({user : req.user});
             } catch (error) {
                 // Token verification failed, user is not authenticated
-                res.status(401).json({ message: 'Access denied, invalid authentication token' });
+                res.status(401).json({ error: 'Access denied, invalid authentication token' });
             }
-        
+        //res.json(req.user)
     }
     
 }

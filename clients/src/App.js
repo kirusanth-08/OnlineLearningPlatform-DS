@@ -12,12 +12,12 @@ import Footer from './components/common/footer/Footer';
 import Login from './components/login/Login';
 import Signup from './components/login/Signup';
 import {AuthContext} from './components/helpers/AuthContext'
-
+//////////////////////////////////////////////////////////////////////
 import { useEffect, useState } from 'react';
 //import axios from 'axios';
   function App() {
 
-    const [authState , setAuthstate] = useState('')
+    const [authState , setAuthstate] = useState(false)
     useEffect(()=>{
       // axios.get('http://localhost:8080/api/user/authenticate',{
       //   headers : {
@@ -25,7 +25,10 @@ import { useEffect, useState } from 'react';
       //   },
       // })
       const auth = localStorage.getItem("authtoken")
-        setAuthstate(auth) 
+      if(auth){
+        setAuthstate(true) 
+      }
+       
     },[])
     return (
       <div>

@@ -3,10 +3,10 @@ const User = require('../models/User')
 
 //every private route we check token is available
 module.exports = async function (req,res,next){
-    // const token  = req.header('auth-token')
+      const token  = req.header('authtoken')
      // Check if the auth-token cookie is present///////////////////////////////////////////////////////
-     const token = req.cookies['authtoken'];
-     if(!token) return res.status(401).send('Access denied, login again')
+    // const token = req.cookies['authtoken'];
+     if(!token) return res.status(401).json({error : 'Access denied, login again'})
  
      try{
          const verified = jwt.verify(token, process.env.TOKEN_SECRET)
