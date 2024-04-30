@@ -6,12 +6,12 @@
 .content-container {
   width: 82%;
   border-radius: 10px;
-  background-color: aliceblue;
+  background-color: rgb(246, 251, 255);
   height: 87vh;
   position: relative;
   top: 12vh;
   left: 17%;
-  box-shadow: 3px 0 35.16px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 0 35.16px  #0c7dda59;
   padding: 30px;
   overflow-y: scroll;
 }

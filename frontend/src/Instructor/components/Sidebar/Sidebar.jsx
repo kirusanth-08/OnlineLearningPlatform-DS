@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import { MdDashboard } from "react-icons/md";
 import { MdSchool } from "react-icons/md";
 import { MdPeople } from "react-icons/md";
-import { MdSettings } from "react-icons/md";
+// import { MdSettings } from "react-icons/md";
 import { MdExitToApp } from "react-icons/md";
 
 const Sidebar = () => {
@@ -44,7 +44,7 @@ const Sidebar = () => {
         </div>
 
         <div className='nav-settings'>
-            <NavLink to='/settings' activeClassName='active-link' className='side_btn'><MdSettings className='sidebar-icon' />Settings</NavLink>
+            {/* <NavLink to='/settings' activeClassName='active-link' className='side_btn'><MdSettings className='sidebar-icon' />Settings</NavLink> */}
             <div className='side_btn' onClick={handleLogout} ><MdExitToApp className='sidebar-icon' />Logout</div>
         </div>
       </div>

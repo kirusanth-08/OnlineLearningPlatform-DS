@@ -7,6 +7,7 @@ import Header from './Instructor/components/Header/Header';
 import Courses from './Instructor/pages/Course/Courses';
 import Student from './Instructor/pages/Students/Student';
 import ModifyCourse from './Instructor/pages/Course/ModifyCourse';
+import Profile from './Instructor/pages/Profile/Profile';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/modify" element={<ModifyCourse />} />
             <Route path="/students" element={<Student />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
       </div>

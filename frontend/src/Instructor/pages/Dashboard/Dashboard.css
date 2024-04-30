@@ -11,7 +11,7 @@
 } */
 
 .instructor-dashboard h1 {
-    color: rgba(0, 0, 77, 0.804);
+    color: rgba(0, 0, 102, 0.804);
 }
 
 .instructor-dashboard .dashboard-stats {
@@ -24,7 +24,7 @@
 
 .dashboard-stats .stat {
     position: relative;
-    background-color: antiquewhite;
+    background-color:  white;
     width: 90%;
     height: 20vh;
     border-radius: 20px;
@@ -34,15 +34,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 6px 6px 10px  #0c7dda59;
+    transition: 0.4s;
 }
 
 .dashboard-stats .stat:hover {
-    box-shadow: 
-        0 0 0 2px #fff,  /* Inner white border */
-        0 0 0 4px #0000006e;  /* Outer black border */
+    box-shadow: 1px 1px 10px  #0c7dda59;
 }
 
 .stat p {
+    color: rgb(0, 14, 95);
     font-size: 2.5rem;
     font-weight: 700;
     text-align: end;
@@ -50,7 +51,7 @@
 
 .stat .stat-icon {
     font-size: 100px;
-    color: rgb(82, 105, 233);
+    color: rgb(0, 15, 102);
     position: absolute;
     bottom: 0;
 }

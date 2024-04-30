@@ -1,5 +1,6 @@
 .sidebar {
     width: 16%;
+    background-color: aliceblue;
     height: 100vh;
     position: absolute;
     padding: 10px 5px;
@@ -7,8 +8,9 @@
     flex-direction: column;
     /* justify-content: space-between; */
     align-items: center;
-    box-shadow: 3px 0 35.16px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 0 15px #0c7dda59;
     min-width: 170px;
+    z-index: 100;
 }
 
 .sidebar .logo {
