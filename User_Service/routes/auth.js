@@ -8,6 +8,6 @@ router.post('/login',userController.loginUser)
 // logout 
 router.post('/logout',userController.logoutUser)
 //authentication 
-router.post('/authenticate',verify,userController.authenticate);
+router.get('/authenticate',verify,userController.authenticate);
 
 module.exports = router
