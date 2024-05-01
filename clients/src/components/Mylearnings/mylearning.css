@@ -58,7 +58,12 @@
 .accordion input[type ="radio"]:checked + .labelss::before{
     content: "-";
 }
-
+.unEnrollBtn{
+    background-color: rgb(218, 219, 218);
+    color: red;
+    padding: 9px;
+    font-size: medium;
+}
 
 /* seconnd */
 .secondLearningContainer{

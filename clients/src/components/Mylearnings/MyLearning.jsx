@@ -53,7 +53,7 @@ const MyLearning = () => {
 
                                 </ul>
                             </div>
-
+                        <button className='unEnrollBtn'>UnEnroll</button>
                         </div>
                     </li>
                     
@@ -103,6 +103,7 @@ const MyLearning = () => {
 
                             </ul>
                         </div>
+                        <button className='unEnrollBtn'>UnEnroll</button>
                     </li>
                 </ul>
             </div>
