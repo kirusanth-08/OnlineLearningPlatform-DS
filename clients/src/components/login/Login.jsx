@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import './login.css'
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom'
 import Back from '../common/back/Back'
 import {useForm}  from 'react-hook-form'
@@ -33,7 +34,12 @@ const Login = () => {
         }
        axios.post('http://localhost:8080/api/user/login',login_data).then((res)=>{
         if(res.data.error){
-            alert(res.data.error)
+            //alert(res.data.error)
+            Swal.fire({
+              icon: 'error',
+              title: res.data.error,
+              text: 'The provided email/password was not found. Please check and try again.',
+            });
 
         }else{
           console.log(res.data)

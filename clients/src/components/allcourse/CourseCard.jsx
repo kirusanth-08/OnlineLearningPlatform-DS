@@ -81,10 +81,10 @@ const CourseCard = () => {
               <button className='outline-btn' onClick={click}>
                  ENROLL NOW ! 
                 </button>
+                {openModal && <CoursePopup closeModel = {setOpenModal} price = {val.priceAll} title = {val.title} description = {val.description}/>}
             </div>
           ))}
         </div>
-        {openModal && <CoursePopup closeModel = {setOpenModal}/>}
       </section>
     </>
   )
