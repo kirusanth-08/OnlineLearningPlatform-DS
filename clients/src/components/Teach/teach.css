@@ -1,0 +1,158 @@
+.aboutHomes {
+    height: auto;
+    background-color: #00050b95;
+    background-attachment: fixed;
+    
+  }
+  .aboutHomes #heading {
+    text-align: left;
+    padding: 0;
+  }
+  .aboutHomes .left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .aboutHomes .right {
+    padding: 80px 30px;
+  }
+   
+  .aboutHomes .items {
+    margin-top: 50px;
+     
+  }
+  .aboutHomes .item {
+    background-color: #f1eeeea4;
+    margin-top: 30px;
+    padding: 20px;
+    transition: 0.5s;
+  }
+  .aboutHomes .img {
+    width: 200px;
+  }
+  .aboutHomes img {
+    width: 80px;
+    height: 70px;
+  }
+  .aboutHomes .item h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  .aboutHomes .item p {
+    color: #999999;
+  }
+  .aboutHomes .item:hover {
+    background-color: #01020f31;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 5px 25px -2px rgb(0 0 0 / 6%);
+  }
+  .aboutHomes .item:hover p {
+    color: #fff;
+  } 
+
+   .teach_container h4{
+    font-weight: 600;
+    font-size: large;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+   }
+.instructions{
+    text-align: left;
+}
+
+  .containers {
+    max-width: 85%;
+    margin: auto;
+     
+  }
+  
+  .flexSBs {
+    display: flex;
+    justify-content: space-between;
+     
+  }
+  .btns{
+    
+        
+        padding: 10px;
+       
+    }
+    button{
+   background: #e6e6f1f5;
+   color: rgb(4, 8, 12);
+   font-size:20px;
+   border-radius: 5px;
+    }
+    button:hover{
+        background-color: #02024ac6;
+        color: rgb(224, 231, 237);
+    }
+  
+    .ulls li{
+        list-style-type :disc;
+        padding: 4px;
+    }
+
+
+
+    /* For screens smaller than 768px */
+@media (max-width: 767px) {
+    .containers {
+        max-width: 100%; /* Adjust max-width for smaller screens */
+    }
+    
+    .btns {
+        margin: 10px ; /* Adjust margin for smaller screens */
+    }
+    .left img {
+        height: auto; /* Make images responsive */
+        width: 100%;
+    }
+}
+
+/* For screens larger than 768px */
+@media (min-width: 768px) {
+    .containers {
+        max-width: 100%; /* Reset max-width for larger screens */
+    }
+    .flexSBs {
+        justify-content: space-between; /* Reset flexbox alignment for larger screens */
+    }
+}
+
+ /* Styles for the popup container */
+.formPopup {
+  display: none; /* Hide the popup by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure the popup is on top of other elements */
+}
+
+/* Styles for the overlay */
+.overlay {
+  display: none; /* Hide the overlay by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 999; /* Ensure the overlay is behind the popup */
+}
+
+/* Show the popup and overlay when the popup is active */
+.popupActive .formPopup {
+  display: block;
+}
+
+.popupActive .overlay {
+  display: block;
+}
+

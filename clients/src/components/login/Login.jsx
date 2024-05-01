@@ -18,7 +18,7 @@ const Login = () => {
     const schema = yup.object().shape({
       
         email : yup.string().email().required(),
-        password : yup.string().max(50).min(8).required(),
+        password : yup.string().required(),
         checked: yup.boolean().oneOf([true], 'Please accept the terms and conditions').required()
 
     })

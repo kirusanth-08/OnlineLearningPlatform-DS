@@ -77,7 +77,6 @@ const CourseCard = () => {
               </div>
               <button className='outline-btn' onClick={click}>
                  ENROLL NOW ! 
-                
                 </button>
             </div>
           ))}

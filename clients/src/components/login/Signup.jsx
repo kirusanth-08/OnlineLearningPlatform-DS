@@ -26,9 +26,12 @@ const Signup = () => {
             email : data.email,
             password : data.password
         }
-        axios.post('http://localhost:8080/api/user/register',register_data).then(()=>{
+        axios.post('http://localhost:8080/api/user/register',register_data).then((res)=>{
+            console.log(res.data.error)
             console.log(register_data)
             navigate('/')
+        }).catch((err)=>{
+            console.log(err)
         })
     }
 

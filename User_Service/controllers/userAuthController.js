@@ -22,22 +22,17 @@ const userAuthController = {
             username :req.body.username,
             email :req.body.email,
             password :hashPassword,
-            role : req.body.role,
             profile_picture : req.body.profile_picture ,
-            expertise: req.body.expertise,
-            bio: req.body.bio
+             
          })
          try{
             const savedUser = await user.save()
-            res.send({user : user._id})
+            res.send({user : savedUser._id})
 
-              // Emit a notification to the admin if the user role is 'instructor'
-        if (req.body.role === 'instructor') {
-            io.emit('newInstructor', { username: req.body.username, email: req.body.email });
-        }
+       
          }
-         catch{
-            res.status(400).send(err)
+         catch(err){
+            res.status(400).send({error : err})
          }
     },
 

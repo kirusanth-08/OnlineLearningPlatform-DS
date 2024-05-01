@@ -1,0 +1,150 @@
+.learningContainer{
+    margin: 0;
+    padding: 0;
+    background-color: rgba(3, 4, 0, 0.665);
+    box-sizing: border-box;
+    
+    
+}
+
+.accordion{
+    margin: 60px auto;
+    width: 1000px;
+}
+
+.accordion .accordianLi {
+    list-style: none;
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: aliceblue;
+    box-shadow: 6px 6px 10px -1px rgb(0, 0,0,0.15 );
+}
+
+.accordion .accordianLi label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.labelss::before{
+    content: "+";
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 800;
+}
+.accordion input[type ="radio"]{
+    display: none;
+}
+
+.accordion .content{
+    color: rgb(0, 15, 15);
+    padding: 0px 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+    transition:  max-height 0.5s , padding 0.5s;
+}
+
+.accordion input[type ="radio"]:checked + .labelss + .content {
+    max-height: 500px;
+    padding: 10px 10px 20px;
+}
+
+.accordion input[type ="radio"]:checked + .labelss::before{
+    content: "-";
+}
+
+
+/* seconnd */
+.secondLearningContainer{
+    margin: 0;
+    padding: 0;
+     
+    box-sizing: border-box;
+     
+}
+.secondAcordion{
+    margin: 60px auto;
+    width: 1000px;
+}
+.secondAcordion .liTag{
+    list-style: none;
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgb(205, 210, 216);
+    box-shadow: 6px 6px 10px -1px rgb(0, 0,0,0.15 );
+}
+
+.secondAcordion .liTag .secondlabel{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.secondlabel::before{
+    content: "+";
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+
+.secondAcordion input[type ="radio"]{
+    display: none;
+}
+
+.secondAcordion .secondContent{
+    color: rgb(18, 23, 23);
+    padding: 0px 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+    transition:  max-height 0.5s , padding 0.5s;
+    position: relative; /* Set position of the container to relative */
+    height: 150px; /* Set a fixed height for the container */
+}
+ 
+ 
+.secondAcordion input[type ="radio"]:checked + .secondlabel + .secondContent {
+    max-height: 500px;
+    padding: 10px 10px 20px;
+}
+
+.secondAcordion input[type ="radio"]:checked + .secondlabel::before {
+    content: "-";
+}
+.secondContent a{
+    text-decoration: none;
+    color: red;
+    padding-left: 10px;
+    font-size: large;
+}
+
+
+
+
+
+
+
+
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+    .accordion, .secondAcordion {
+        margin: 30px auto;
+    }
+
+    .accordion .accordianLi, .secondAcordion .liTag {
+        margin: 10px;
+    }
+}
