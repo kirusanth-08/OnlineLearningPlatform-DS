@@ -1,0 +1,6 @@
+.paypal-container {
+    background-color: rgb(248, 248, 235);
+    margin: 10px;
+    display: flex;
+    justify-content: center; /* Horizontally center the container */
+}

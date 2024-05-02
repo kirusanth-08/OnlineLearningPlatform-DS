@@ -79,7 +79,7 @@ const courseController = {
     viewAllCourse: async (req, res) => {
         try {
 
-            const courses = await Course.find();
+            const courses = await Course.find({isApproved : true});
 
             res.json({ course : courses });
         } catch (error) {

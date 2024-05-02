@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react'
 import Head from './Head'
 import './Header.css'
-import  {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AuthContext } from '../../helpers/AuthContext'
 
 const Header = () => {
-    const [click , setClick] = useState(false)
+  const [click, setClick] = useState(false)
 
-    const {authState} = useContext(AuthContext)
-    
+  const { authState } = useContext(AuthContext)
+
   return (
     <>
-      <Head/>
+      <Head />
       <header>
         <nav className='flexSB'>
           <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
@@ -27,16 +27,32 @@ const Header = () => {
             <li>
               <Link to='/contact'>Contact</Link>
             </li>
+            {!authState.instructor ?
+              <li>
+                <Link to='/teach'>Start Teach</Link>
+              </li>
+              :
+              <li>
+                <Link to='/instructor'>Instructor</Link>
+              </li>
+            }
+            {
+              authState.status &&
+              <li>
+                <Link to='/leanings'>My learnings</Link>
+              </li>
+            }
+
           </ul>
           <div className='start'>
-            {!authState.status ? 
-            <div className='button'>GET COURSE</div> 
-                            : 
-            <div className='button' style={{ textTransform: 'uppercase' }}>{authState.username}</div>
-          }
-            
+            {!authState.status ?
+              <div className='button'>GET COURSE</div>
+              :
+              <div className='button' style={{ textTransform: 'uppercase' }}>{authState.username}</div>
+            }
+
           </div>
-          
+
           <button className='toggle' onClick={() => setClick(!click)}>
             {click ? <i className='fa fa-times'> </i> : <i className='fa fa-bars'></i>}
           </button>

@@ -42,6 +42,10 @@ const courseSchema = new mongoose.Schema({
     duration:{
         type: Number,
         required: true
+    },
+    isApproved:{
+        type : Boolean,
+        default : false
     }
      
 });
