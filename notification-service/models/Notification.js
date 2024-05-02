@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const notificationSchema = new mongoose.Schema({
+const notificationSchema = new Schema({
   date: {
     type: Date,
     required: true,
@@ -17,6 +18,11 @@ const notificationSchema = new mongoose.Schema({
     type: String,
     enum: ['seen', 'not seen'],
     default: 'not seen',
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
 });
 
