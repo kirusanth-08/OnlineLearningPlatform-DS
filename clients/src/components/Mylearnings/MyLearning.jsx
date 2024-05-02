@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import './mylearning.css'
 import Back from '../common/back/Back'
- 
+import PlayVideo from './PlayVideo'
+
 
 const MyLearning = () => {
-    
- 
+    const [openModal , setOpenModal] = useState(false)
+
 
     return (
 
@@ -25,8 +26,13 @@ const MyLearning = () => {
                                         <label htmlFor="1" className='secondlabel'>video</label>
                                         <div className="secondContent">
                                             
-                                            <a href="#">Open Video</a>
-                                             
+                                            <a href="#" onClick={()=>{
+                                                setOpenModal(true)
+                                            }}>Open Video</a>
+                                            {openModal && 
+                                               <PlayVideo closeVideo={setOpenModal}/>
+                                            }
+                                          
                                             
                                         </div>
                                     </li>
