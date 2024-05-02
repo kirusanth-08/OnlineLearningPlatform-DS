@@ -12,10 +12,10 @@ export default function PayPal({price , title}) {
                   intent: "CAPTURE",
                   purchase_units: [
                     {
-                      description: {title},
+                      description: title,
                       amount: {
                         currency_code: "CAD",
-                        value:{price},
+                        value: price,
                       },
                     },
                   ],
@@ -23,7 +23,7 @@ export default function PayPal({price , title}) {
               },
               onApprove: async (data, actions) => {
                 const order = await actions.order.capture();
-                console.log("successful order" + order);
+                console.log(order);
                 Swal.fire({
                     icon: 'success',
                     title: 'Payment Successful',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './coursepopup.css'
 import PayPal from '../PayPal/PayPal'
-function CoursePopup({ closeModel ,price ,title ,description }) {
+function CoursePopup({ closeModel, price, title, description }) {
     const [checkout, setCheckOut] = useState(false)
     return (
         <>
@@ -20,7 +20,7 @@ function CoursePopup({ closeModel ,price ,title ,description }) {
                         </div>
                         <div className='introDiv'>
                             <h3>What you'll learn</h3>
-                            <p> 
+                            <p>
                                 {description}
                             </p>
 
@@ -28,17 +28,17 @@ function CoursePopup({ closeModel ,price ,title ,description }) {
 
                     </div>
                     {checkout ? (
-                        <PayPal price={price} title ={title}/>
-                    ): (
-                        <button className = 'startBtn' onClick = {
-                            ()=> {
+                        <PayPal price={price} title={title} />
+                    ) : (
+                        <button className='startBtn' onClick={
+                            () => {
                                 setCheckOut(true)
                             }
                         }>Enroll Now</button>
                     )}
 
-            </div>
-        </div >
+                </div>
+            </div >
         </>
     )
 }
