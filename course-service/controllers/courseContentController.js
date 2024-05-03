@@ -91,10 +91,10 @@ const courseContentController = {
 
             const courseContent = await CourseContent.find(); 
              
-            res.status(200).json({ courseContent });
+            res.json({ content : courseContent });
         } catch (error) {
             console.error('Error fetching course content:', error);
-            res.status(500).json({ error: 'Internal server error' });
+            res.json({ error: 'Internal server error' });
         }
     }
 }

@@ -89,7 +89,7 @@ const userAuthController = {
     
                 // If token doesn't exist, user is not authenticated
                 if (!token) {
-                    return res.status(401).json({ message: 'Access denied, authentication token missing' });
+                    return res.status(401).json({ error: 'Access denied, authentication token missing' });
                 }
     
                 // Verify the token

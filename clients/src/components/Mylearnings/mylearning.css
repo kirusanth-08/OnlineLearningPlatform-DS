@@ -1,6 +1,6 @@
 .learningContainer{
     margin: 0;
-    padding: 0;
+    padding: 10px;
     background-color: rgba(3, 4, 0, 0.665);
     box-sizing: border-box;
     
@@ -10,15 +10,18 @@
 .accordion{
     margin: 60px auto;
     width: 1000px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+     
 }
 
 .accordion .accordianLi {
     list-style: none;
-    width: 100%;
+    width: 90%;
     margin: 20px;
     padding: 10px;
     border-radius: 8px;
-    background-color: aliceblue;
+    background-color: rgba(221, 221, 235, 0.715);
     box-shadow: 6px 6px 10px -1px rgb(0, 0,0,0.15 );
 }
 
@@ -59,13 +62,46 @@
     content: "-";
 }
 .unEnrollBtn{
-    background-color: rgb(218, 219, 218);
-    color: red;
-    padding: 9px;
-    font-size: medium;
+    background-color: rgb(3, 12, 3);
+    color: rgb(254, 254, 254);
+    padding: 5px;
+    font-size: 15px;
+}
+.unEnrollBtn:hover{
+    background-color: #ff0000;
 }
 
+.labelss{
+    color: #000000;
+}
+
+.content a {
+    text-decoration: none;
+    padding: 10px;
+    font-size: large;
+}
+.content a:hover{
+    color: #ba0a0a;
+}
+.content h5{
+    padding: 10px;
+}
+.content h4{
+    padding: 10px;
+}
+
+.content hr{
+    padding: 0;
+    border: solid 1px rgb(3, 3, 3);
+ 
+}
+
+.unEnrollDiv{
+    padding: 30px;
+}
 /* seconnd */
+/* 
+
 .secondLearningContainer{
     margin: 0;
     padding: 0;
@@ -95,15 +131,12 @@
     font-weight: 700;
     cursor: pointer;
 }
-
 .secondlabel::before{
     content: "+";
     margin-right: 10px;
     font-size: 24px;
     font-weight: 800;
 }
-
-
 .secondAcordion input[type ="radio"]{
     display: none;
 }
@@ -116,15 +149,13 @@
     overflow: hidden;
     transition:  max-height 0.5s , padding 0.5s;
     position: relative; /* Set position of the container to relative */
-    height: 150px; /* Set a fixed height for the container */
-}
- 
+    /* height: 150px; Set a fixed height for the container */
+/* }
  
 .secondAcordion input[type ="radio"]:checked + .secondlabel + .secondContent {
     max-height: 500px;
     padding: 10px 10px 20px;
 }
-
 .secondAcordion input[type ="radio"]:checked + .secondlabel::before {
     content: "-";
 }
@@ -134,7 +165,7 @@
     padding-left: 10px;
     font-size: large;
 }
-
+ */ 
 
 
 
@@ -144,6 +175,7 @@
 
 
 /* Responsive styles */
+
 @media only screen and (max-width: 768px) {
     .accordion, .secondAcordion {
         margin: 30px auto;
