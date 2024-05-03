@@ -13,7 +13,18 @@ const enrollmentController = {
                 return res.status(400).json({ message: 'User is already enrolled in this course' });
             }
 
-            // If the user has not enrolled in the course, create a new enrollment
+            // Check if the course is published by the same user
+            const course = await Course.findById(courseId);
+
+            if (!course) {
+                return res.status(404).json({ message: 'Course not found' });
+            }
+
+            if (course.user_id.toString() === userId) {
+                return res.status(400).json({ message: 'User cannot enroll in their own course' });
+            }
+
+            // If the user has not enrolled in the course and the course is not published by the user, create a new enrollment
             const enrollment = new Enrollment({ course_id: courseId, user_id: userId });
             await enrollment.save();
 
@@ -34,6 +45,20 @@ const enrollmentController = {
             }
 
             res.json(enrollment);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
+    //cancelled the enrollment
+    handlePaymentCancellation: async (req, res) => {
+        try {
+            const { enrollmentId } = req.params;
+
+            // Delete the enrollment entry
+            await Enrollment.findByIdAndDelete(enrollmentId);
+
+            res.json({ message: 'Enrollment cancelled' });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
