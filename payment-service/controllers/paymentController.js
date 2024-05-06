@@ -2,12 +2,13 @@ const Payment = require('../models/Payment');
 
 const paymentController = {
   createPayment: async (req, res) => {
+    
     const newPayment = new Payment(req.body);
     try {
       const savedPayment = await newPayment.save();
-      res.status(200).json(savedPayment);
+      res.status(200).json({payment :savedPayment});
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json('errororor');
     }
   },
 

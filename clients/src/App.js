@@ -3,7 +3,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/common/heading/Header';
-import { BrowserRouter as Router, Routes, Route ,Link} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route ,Link } from 'react-router-dom'
 import Home from './components/Home/Home';
 import About from './components/about/About';
 import CourseHome from './components/allcourse/CourseHome';
@@ -19,7 +19,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import MyLearning from './components/Mylearnings/MyLearning';
   function App() {
-
     const [authState , setAuthstate] = useState({
       username : '',
       id : '',
@@ -45,6 +44,7 @@ import MyLearning from './components/Mylearnings/MyLearning';
               }
              
             )
+            console.log(res.data._id)
           }
       }).catch((err)=>{
         console.log(err)
@@ -59,7 +59,7 @@ import MyLearning from './components/Mylearnings/MyLearning';
       <div>
         <AuthContext.Provider value={{authState , setAuthstate}}>
         <Router>
-          <Header />
+            <Header /> 
              <Link to ='/login' />
           <Routes>
             <Route exact path='/'  element={<Home/>} />
@@ -70,9 +70,9 @@ import MyLearning from './components/Mylearnings/MyLearning';
             <Route  path='/signup'  element={<Signup/>} />
             <Route  path='/teach'  element={<Teach/>} />
             <Route  path='/leanings'  element={<MyLearning/>} />
-            
-            
-          </Routes>
+
+
+          </Routes>         
           <Footer/>
         </Router>
         </AuthContext.Provider >
