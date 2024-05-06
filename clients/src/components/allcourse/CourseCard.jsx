@@ -4,16 +4,19 @@ import "./courses.css"
 import {  useNavigate } from 'react-router-dom'
 import { AuthContext } from '../helpers/AuthContext'
 import axios from 'axios'
+import CoursePopup from '../course/CoursePopup'
 
  /////////////////////////////////////////////////////////
 const CourseCard = () => {
+
   const navigate = useNavigate()
+  const [openModal , setOpenModal] = useState(false)
   const {authState} = useContext(AuthContext)
   const [courses , setCourses] = useState([])
   const click = ()=>{
     //{!authState == '' ? navigate('/about') : navigate('/login')  }
-    {authState.status ? navigate('/about') : navigate('/login')  }
-    
+    {!authState.status && navigate('/login')  }
+    setOpenModal(true)
   }
  
   useEffect(()=>{
@@ -77,8 +80,8 @@ const CourseCard = () => {
               </div>
               <button className='outline-btn' onClick={click}>
                  ENROLL NOW ! 
-                
                 </button>
+                {openModal && <CoursePopup closeModel = {setOpenModal} price = {val.priceAll} title = {val.title} description = {val.description}/>}
             </div>
           ))}
         </div>

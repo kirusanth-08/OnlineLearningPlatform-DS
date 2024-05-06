@@ -11,10 +11,6 @@ const courseContentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    descriptions: {
-        type: String,
-        required: true
-    },
     course_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course', // Referencing the Course model
@@ -22,6 +18,16 @@ const courseContentSchema = new mongoose.Schema({
     },
     video : {
         type: String
+    },
+    lecture: {
+        filename: String, // Original filename
+        path: String // File path or URL
+        // You can add more fields if needed, such as size, MIME type, etc.
+    },
+    assignment: {
+        filename: String, // Original filename
+        path: String // File path or URL
+        // You can add more fields if needed, such as size, MIME type, etc.
     }
      
 });

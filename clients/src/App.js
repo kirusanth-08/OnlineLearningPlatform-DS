@@ -11,10 +11,13 @@ import Contact from './components/contact/Contact';
 import Footer from './components/common/footer/Footer';
 import Login from './components/login/Login';
 import Signup from './components/login/Signup';
+import Teach from './components/Teach/Teach';
+
 import {AuthContext} from './components/helpers/AuthContext'
 //////////////////////////////////////////////////////////////////////
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import MyLearning from './components/Mylearnings/MyLearning';
   function App() {
 
     const [authState , setAuthstate] = useState({
@@ -63,9 +66,11 @@ import axios from 'axios';
             <Route  path='/about'  element={<About/>} />
             <Route  path='/courses'  element={<CourseHome/>} />
             <Route  path='/contact'  element={<Contact/>} />
-             
             <Route  path='/login'  element={<Login/>} />
             <Route  path='/signup'  element={<Signup/>} />
+            <Route  path='/teach'  element={<Teach/>} />
+            <Route  path='/leanings'  element={<MyLearning/>} />
+            
             
           </Routes>
           <Footer/>
