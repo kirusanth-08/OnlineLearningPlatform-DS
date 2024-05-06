@@ -3,8 +3,16 @@ const Payment = require('../models/Payment');
 const paymentController = {
   createPayment: async (req, res) => {
     
-    const newPayment = new Payment(req.body);
     try {
+    const alreadyCompleted = await Payment.find({course_id:req.body.course_id, user:req.body.user})
+    console.log(req.body.course_id)
+    console.log(req.body.user)
+    console.log(alreadyCompleted.length)
+    if(alreadyCompleted.length>0)  return res.json({message : 'already purchased'})
+
+
+
+    const newPayment = new Payment(req.body);
       const savedPayment = await newPayment.save();
       res.status(200).json({payment :savedPayment});
     } catch (err) {

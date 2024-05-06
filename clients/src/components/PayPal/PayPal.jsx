@@ -57,6 +57,7 @@ export default function PayPal({price , title,userID,courseID}) {
 
       const payments={
         user : localStorage.getItem('id'),
+        course_id:courseID,
         amount:price,
         status : status
       }
@@ -68,7 +69,7 @@ export default function PayPal({price , title,userID,courseID}) {
               if(res.data.error){
                 console.log(res.data.error)
             }else{
-              console.log(res.data.payment)
+              console.log(res.data)
               if(status === 'completed'){
                 axios.put(`http://localhost:8085/api/enrollments/enroll/${courseID}/${userID}`,updatePayment).then((res)=>{
                   console.log(res.data.message)

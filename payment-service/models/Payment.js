@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 const PaymentSchema = new mongoose.Schema({
+  course_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Course',
+    required: true
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
