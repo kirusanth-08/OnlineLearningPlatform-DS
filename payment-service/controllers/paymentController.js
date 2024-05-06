@@ -8,7 +8,7 @@ const paymentController = {
       const savedPayment = await newPayment.save();
       res.status(200).json({payment :savedPayment});
     } catch (err) {
-      res.status(500).json('errororor');
+      res.status(500).json({error : 'error'});
     }
   },
 

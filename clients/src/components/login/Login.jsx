@@ -45,6 +45,7 @@ const Login = () => {
           console.log(res.data)
             localStorage.setItem('authtoken', res.data.token)
             localStorage.setItem('id',res.data.id)
+            localStorage.setItem('name',res.data.username)
             setAuthstate({
               username :res.data.username,
               id :res.data.id,

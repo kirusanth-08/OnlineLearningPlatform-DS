@@ -5,6 +5,8 @@ const Head = () => {
     const {authState ,setAuthstate} = useContext(AuthContext)
     const logout =()=>{
         localStorage.removeItem('authtoken')
+        localStorage.removeItem('id')
+        localStorage.removeItem('name')
         setAuthstate({
             username : '',
             id : '',

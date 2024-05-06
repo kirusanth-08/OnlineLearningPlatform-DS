@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const EnrollmentSchema = new mongoose.Schema({
-  enrollment_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    unique: true
-  },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -30,5 +25,7 @@ const EnrollmentSchema = new mongoose.Schema({
     default: 0
   }
 });
+
+ 
 
 module.exports = mongoose.model('Enrollment', EnrollmentSchema);

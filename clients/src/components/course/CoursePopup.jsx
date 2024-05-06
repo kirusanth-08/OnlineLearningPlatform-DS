@@ -1,8 +1,25 @@
 import React, { useState } from 'react'
 import './coursepopup.css'
 import PayPal from '../PayPal/PayPal'
-function CoursePopup({ closeModel, price, title, description }) {
+import axios from 'axios'
+
+function CoursePopup({ closeModel, price, title, description,courseID }) {
+   
     const [checkout, setCheckOut] = useState(false)
+    const makeEnroll=()=>{
+        // console.log('course =>>'+courseID)
+        const enrolldata={
+            user_id : localStorage.getItem('id'),
+            course_id:courseID,
+
+        }
+        axios.post('http://localhost:8085/api/enrollments/enroll',enrolldata).then((res)=>{
+            console.log(res.data)
+           
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
     return (
         <>
             <div className="modelBackground">
@@ -28,11 +45,13 @@ function CoursePopup({ closeModel, price, title, description }) {
 
                     </div>
                     {checkout ? (
-                        <PayPal price={price} title={title} />
+                        <PayPal price={price} title={title} userID = { localStorage.getItem('id')} courseID={courseID}/>
                     ) : (
                         <button className='startBtn' onClick={
                             () => {
+
                                 setCheckOut(true)
+                                makeEnroll();
                             }
                         }>Enroll Now</button>
                     )}
