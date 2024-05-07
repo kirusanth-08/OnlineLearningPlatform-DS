@@ -4,7 +4,7 @@ import { tokens } from "../../theme";
 import { mockDataPayments } from "../../data/mockData";
 import Header from "../../components/Header";
 
-const Invoices = () => {
+const Payments = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
@@ -80,4 +80,4 @@ const Invoices = () => {
   );
 };
 
-export default Invoices;
+export default Payments;

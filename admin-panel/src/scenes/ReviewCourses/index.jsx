@@ -43,6 +43,7 @@ const ReviewCourses = () => {
     {
       field: "price",
       headerName: "Price",
+      headerAlign: "right",
       type: "currency",
       valueFormatter: (value) => `$${value}`,
       align: "right",

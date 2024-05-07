@@ -48,7 +48,7 @@ const Instructors = () => {
     <Box m="20px">
       <Header
         title="INSTRUCTORS"
-        subtitle="List of Contacts for Future Reference"
+        subtitle="List of Instructor's Details"
       />
       <Box
         m="40px 0 0 0"

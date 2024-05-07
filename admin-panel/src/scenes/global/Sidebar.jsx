@@ -117,7 +117,7 @@ const Sidebar = () => {
             />
             <Item
               title="Course Payments"
-              to="/invoices"
+              to="/payments"
               icon={<PaidIcon />}
               selected={selected}
               setSelected={setSelected}

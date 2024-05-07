@@ -4,7 +4,7 @@ import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import Courses from "./scenes/Courses";
-import Invoices from "./scenes/invoices";
+import Payments from "./scenes/Payments";
 import Instructors from "./scenes/Instructors";
 import Form from "./scenes/form";
 import FAQ from "./scenes/faq";
@@ -29,7 +29,7 @@ function App() {
               <Route path="/reviewcourses" element={<ReviewCourses />} />
               <Route path="/courses" element={<Courses />} />
               <Route path="/instructors" element={<Instructors />} />
-              <Route path="/invoices" element={<Invoices />} />
+              <Route path="/payments" element={<Payments />} />
               <Route path="/form" element={<Form />} />
               <Route path="/faq" element={<FAQ />} />
             </Routes>
