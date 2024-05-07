@@ -24,37 +24,31 @@ const studentController = {
 
      //update 
      updateProfile: async (req, res) => {
-        if (req.user.role !== 'student') {
-            return res.status(403).json({ message: 'Forbidden. Only student can update their profile.' });
-        }
+         
     
         try {
-            const userId = req.user._id;
-            const updatedDP= req.body.profile_picture; // Assuming the updated profile data is sent in the request body
+            const userId = req.params.id;
+            const updatedStatus= req.body.instructor; // Assuming the updated profile data is sent in the request body
             
     
             // Check if the user exists and is an student
             const user = await User.findById(userId);
     
             if (!user) {
-                return res.status(404).json({ message: 'User not found.' });
+                return res.status(404).json({ error: 'User not found.' });
             }
     
-            // Check if the user is updating their own profile
-            if (user._id.toString() !== req.params.id) {
-                return res.status(401).json({ message: `Forbidden. You can't update other users' profile.` });
-            }
-    
-            user.profile_picture = updatedDP
+            
+            user.instructor = updatedStatus
              
 
             // Update the user's profile
             const updatedDetails = await user.save()
             
     
-            res.json({ message: 'Profile updated successfully.', updatedDetails });
+            res.json({ message: 'Profile status updated successfully.', updatedDetails });
         } catch (err) {
-            res.status(500).json({ message: 'Internal Server Error' });
+            res.status(500).json({ error: 'Internal Server Error' });
         }
     }
 }

@@ -5,16 +5,16 @@ const courseController = {
         
         try {
              
-            const { title, description, instructor_id, priceAll, pricePer,dcover,name} = req.body;
+            const { title, description, instructor_id, priceAll, pricePer ,duration} = req.body;
 
-        
+             
             const newCourse = new Course({
                 title,
                 description,
                 instructor_id,
                 priceAll,
                 pricePer,
-                 
+                duration
                 
             });
 
