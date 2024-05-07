@@ -9,12 +9,13 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { tokens } from "../../theme";
-import CourseContentCreate from "../../components/CreateCourseContent";
+import CreateContentPopup from "../../components/CreateContentPopup";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { Link } from "react-router-dom";
+import EditContentPopup from "../../components/EditContentPopup";
 
 const ViewCourse = () => {
-  const fileName = 'pdf1.pdf';
+  const fileName = "pdf1.pdf";
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { id } = useParams();
@@ -68,27 +69,32 @@ const ViewCourse = () => {
           Lession 1
         </AccordionSummary>
         <AccordionDetails>
-            <Box p={2}
-              sx={{
-                backgroundColor: colors.primary[400],
-                color: colors.grey[100],
-                position: "relative",
-              }}
-            >
-              <h1>Topic</h1>
-              <p>
-                This is a sample description.
-                Refer the pdf below for more details.
-              </p>
-              <Link href={`files/${fileName}`} target="_blank">
-                <PictureAsPdfIcon /> {fileName}
-              </Link>
-            </Box>
+          <Box
+            p={2}
+            sx={{
+              backgroundColor: colors.primary[400],
+              color: colors.grey[100],
+              position: "relative",
+            }}
+          >
+            <h1>Topic</h1>
+            <p>
+              This is a sample description. Refer the pdf below for more
+              details.
+            </p>
+            <Link href={`files/${fileName}`} target="_blank">
+              <PictureAsPdfIcon /> {fileName}
+            </Link>
+            <EditContentPopup 
+              id={id}
+              // title={title}
+              // description={description}
+            />
+          </Box>
         </AccordionDetails>
       </Accordion>
-      
-      <CourseContentCreate />
 
+      <CreateContentPopup />
     </Box>
   );
 };
