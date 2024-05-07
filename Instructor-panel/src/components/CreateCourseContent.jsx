@@ -1,13 +1,28 @@
-import * as React from 'react';
-import { Button, Dialog, ListItemText, ListItemButton, List, Divider, AppBar, Toolbar, IconButton, Typography, Slide, useTheme, Box } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { tokens } from '../theme';
+import * as React from "react";
+import {
+  Button,
+  Dialog,
+  ListItemText,
+  List,
+  Divider,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Slide,
+  useTheme,
+  Box,
+  TextField
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { tokens } from "../theme";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function CourseContentCreate() {
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [open, setOpen] = React.useState(false);
@@ -23,25 +38,29 @@ export default function CourseContentCreate() {
   return (
     <Box m={5}>
       <React.Fragment>
-        <Button variant="outlined" onClick={handleClickOpen}
+        <Button
+          variant="outlined"
+          onClick={handleClickOpen}
           sx={{
             backgroundColor: colors.primary[400],
             color: colors.grey[100],
             position: "relative",
             ":hover": {
+              color: "white",
               backgroundColor: colors.primary[500],
             },
           }}
         >
-          Create Course Content
+          Add Course Content
         </Button>
         <Dialog
-          fullScreen
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
+          PaperProps={{ style: { width: '80%' } }} 
+          maxWidth="md"
         >
-          <AppBar sx={{ position: 'relative' }}>
+          <AppBar sx={{ position: "relative" }}>
             <Toolbar>
               <IconButton
                 edge="start"
@@ -55,21 +74,36 @@ export default function CourseContentCreate() {
                 Create course content
               </Typography>
               <Button autoFocus color="inherit" onClick={handleClose}>
-                save
+                Add
               </Button>
             </Toolbar>
           </AppBar>
           <List>
-            <ListItemButton>
-              <ListItemText primary="Phone ringtone" secondary="Titania" />
-            </ListItemButton>
-            <Divider />
-            <ListItemButton>
+            <Box p={5} >
               <ListItemText
-                primary="Default notification ringtone"
-                secondary="Tethys"
-              />
-            </ListItemButton>
+                primary="Topic"
+                secondary={
+                  <TextField label="Enter Topic" fullWidth margin="normal" value={"Heythere"}/>
+                }
+                />
+              <Divider />
+              <ListItemText
+                primary="Description"
+                secondary={
+                  <TextField label="Enter Description" fullWidth margin="normal" />
+                }
+                />
+              <Divider />
+              <ListItemText
+                primary="Content"
+                secondary={
+                  <Button variant="contained" component="label">
+                    Upload File
+                    <input type="file" hidden />
+                  </Button>
+                }
+                />
+            </Box>
           </List>
         </Dialog>
       </React.Fragment>

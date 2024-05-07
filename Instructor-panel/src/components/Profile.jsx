@@ -8,7 +8,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
 import { IconButton } from "@mui/material";
 import Swal from 'sweetalert2'
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -52,8 +51,8 @@ export default function Profile() {
 
   return (
     <div>
-    <IconButton>
-      <PersonOutlinedIcon aria-describedby={id} variant="contained" onClick={handleClick}/>
+    <IconButton onClick={handleClick}>
+      <PersonOutlinedIcon aria-describedby={id} variant="contained"/>
     </IconButton>
       <Popover
         id={id}
@@ -71,7 +70,7 @@ export default function Profile() {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon />
+                  <PersonOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Profile" />
               </ListItemButton>

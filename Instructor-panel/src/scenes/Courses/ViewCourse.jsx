@@ -3,7 +3,6 @@ import { Box, useTheme } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -11,8 +10,11 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { tokens } from "../../theme";
 import CourseContentCreate from "../../components/CreateCourseContent";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import { Link } from "react-router-dom";
 
 const ViewCourse = () => {
+  const fileName = 'pdf1.pdf';
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { id } = useParams();
@@ -66,8 +68,21 @@ const ViewCourse = () => {
           Lession 1
         </AccordionSummary>
         <AccordionDetails>
-            <Box>
-                <p>Content</p>
+            <Box p={2}
+              sx={{
+                backgroundColor: colors.primary[400],
+                color: colors.grey[100],
+                position: "relative",
+              }}
+            >
+              <h1>Topic</h1>
+              <p>
+                This is a sample description.
+                Refer the pdf below for more details.
+              </p>
+              <Link href={`files/${fileName}`} target="_blank">
+                <PictureAsPdfIcon /> {fileName}
+              </Link>
             </Box>
         </AccordionDetails>
       </Accordion>
