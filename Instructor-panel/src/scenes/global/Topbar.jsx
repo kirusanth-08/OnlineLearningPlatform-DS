@@ -4,9 +4,9 @@ import { ColorModeContext, tokens } from "../../theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import Badge from "@mui/material/Badge";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Topbar = () => {
   const theme = useTheme();
@@ -114,13 +114,13 @@ const Topbar = () => {
                   textAlign: "start",
                 }}
               >
-                A new course has been created by a student
+                A new course has been created
               </div>
             </div>
           </div>
         )}
         <IconButton>
-          <SettingsOutlinedIcon />
+          <LogoutIcon />
         </IconButton>
         <IconButton>
           <PersonOutlinedIcon />
