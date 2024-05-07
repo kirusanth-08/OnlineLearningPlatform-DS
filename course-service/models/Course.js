@@ -26,10 +26,10 @@ const courseSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        profile_picture: {
-            type: String,
-            required: true
-        }
+        // profile_picture: {
+        //     type: String,
+        //     required: true
+        // }
     },
     priceAll: {
         type: Number,
