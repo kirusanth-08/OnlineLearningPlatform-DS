@@ -10,7 +10,15 @@ const Courses = () => {
         <div className='courses-container'>
             <div className='course'>
               <p className='course-status'>In Progress</p>
-                {/* <img src='https://www.codingninjas.com/assets-landing/images/CNLOGO.svg' /> */}
+                <div className='course-details'>
+                    <h3>Web Development</h3>
+                    <p>Learn Web Development from scratch</p>
+                    <button className='view-course'>View Course</button>
+                    <Link to="/courses/modify" className='edit-course'>Edit Course</Link>
+                </div>
+            </div>
+            <div className='course'>
+              <p className='course-status'>In Progress</p>
                 <div className='course-details'>
                     <h3>Web Development</h3>
                     <p>Learn Web Development from scratch</p>

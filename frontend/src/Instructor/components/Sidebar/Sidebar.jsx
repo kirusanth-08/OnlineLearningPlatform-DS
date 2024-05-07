@@ -38,7 +38,7 @@ const Sidebar = () => {
       <div className='logo'>Alright</div>
       <div className='sidebar-elements'>
         <div className='nav-links'>
-            <NavLink to='/dashboard' activeClassName='active-link' className='side_btn'><MdDashboard className='sidebar-icon' />Dashboard</NavLink>
+            <NavLink to='/' activeClassName='active-link' className='side_btn'><MdDashboard className='sidebar-icon' />Dashboard</NavLink>
             <NavLink to='/courses' activeClassName='active-link' className='side_btn'><MdSchool  className='sidebar-icon' />Courses</NavLink>
             <NavLink to='/students' activeClassName='active-link' className='side_btn'><MdPeople  className='sidebar-icon' />Students</NavLink>
         </div>
