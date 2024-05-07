@@ -33,6 +33,7 @@ import CoursePopup from '../course/CoursePopup'
   }, []);
 
   const openModal = (courseID) => {
+    {!localStorage.getItem('authtoken') && navigate('/login')}
     setCourseModals({ ...courseModals, [courseID]: true });
   };
 
