@@ -3,7 +3,6 @@ import './Header.css'
 import { Link } from 'react-router-dom'
 import { MdNotifications } from "react-icons/md";
 import Swal from 'sweetalert2'
-
 const Header = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileOptions, setShowProfileOptions] = useState(false);
@@ -13,6 +12,19 @@ const Header = () => {
     event.preventDefault();
     setShowNotifications(!showNotifications);
   }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+        setShowNotifications(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   
 
@@ -37,19 +49,6 @@ const Header = () => {
       }
     });
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
-        setShowNotifications(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   return (
     <div className='header'>
