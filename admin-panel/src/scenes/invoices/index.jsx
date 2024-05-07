@@ -1,50 +1,50 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataInvoices } from "../../data/mockData";
+import { mockDataPayments } from "../../data/mockData";
 import Header from "../../components/Header";
 
 const Invoices = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
-    { field: "id", headerName: "ID" },
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 1,
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
+    { field: "id", 
+      headerName: "ID",
+      type: "string",
       flex: 1,
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "user",
+      headerName: "User ID",
       flex: 1,
+      // cellClassName: "name-column--cell",
     },
     {
-      field: "cost",
-      headerName: "Cost",
+      field: "amount",
+      headerName: "Amount",
       flex: 1,
-      renderCell: (params) => (
-        <Typography color={colors.greenAccent[500]}>
-          ${params.row.cost}
-        </Typography>
-      ),
+      valueFormatter: (value) => `$${value}`,
     },
     {
       field: "date",
       headerName: "Date",
       flex: 1,
     },
+    // {
+    //   field: "status",
+    //   headerName: "Cost",
+    //   flex: 1,
+    // },
+    // {
+    //   field: "date",
+    //   headerName: "Date",
+    //   flex: 1,
+    // },
   ];
 
   return (
     <Box m="20px">
-      <Header title="INVOICES" subtitle="List of Invoice Balances" />
+      <Header title="PAYMETNS RECEIVED" subtitle="List of Payments Received" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -74,7 +74,7 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+        <DataGrid checkboxSelection rows={mockDataPayments} columns={columns} />
       </Box>
     </Box>
   );

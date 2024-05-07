@@ -10,6 +10,7 @@ import Form from "./scenes/form";
 import FAQ from "./scenes/faq";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
+import ReviewCourses from "./scenes/ReviewCourses";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -25,6 +26,7 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/reviewcourses" element={<ReviewCourses />} />
               <Route path="/courses" element={<Courses />} />
               <Route path="/instructors" element={<Instructors />} />
               <Route path="/invoices" element={<Invoices />} />

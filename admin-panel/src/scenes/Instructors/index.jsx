@@ -1,61 +1,53 @@
 import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataContacts } from "../../data/mockData";
+import { mockDataInstructors } from "../../data/mockData";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
 
-const Contacts = () => {
+const Instructors = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 1,
-      cellClassName: "name-column--cell",
+    { 
+      field: "id", 
+      headerName: "ID", 
+      flex: 1 
     },
     {
-      field: "age",
-      headerName: "Age",
+     field: "name",
+     headerName: "Name",
+      flex: 1,
+    },
+    {
+      field: "No_of_Courses",
+      headerName: "No.of.Courses",
       type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
       flex: 1,
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "total_Students",
+      headerName: "Total Students",
+      type: "number",
       flex: 1,
     },
     {
-      field: "address",
-      headerName: "Address",
+      field: "total_earned",
+      headerName: "Total Earned",
+      headerAlign: "right",
+      valueFormatter: (value) => `$ ${value}`,
+      cellClassName: "name-column--cell",
+      type: "currency",
+      align: "right",
       flex: 1,
-    },
-    {
-      field: "city",
-      headerName: "City",
-      flex: 1,
-    },
-    {
-      field: "zipCode",
-      headerName: "Zip Code",
-      flex: 1,
-    },
+    }
   ];
 
   return (
     <Box m="20px">
       <Header
-        title="CONTACTS"
+        title="INSTRUCTORS"
         subtitle="List of Contacts for Future Reference"
       />
       <Box
@@ -91,7 +83,7 @@ const Contacts = () => {
         }}
       >
         <DataGrid
-          rows={mockDataContacts}
+          rows={mockDataInstructors}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />
@@ -100,4 +92,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Instructors;

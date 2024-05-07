@@ -7,7 +7,7 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 
-const Courses = () => {
+const ReviewCourses = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
@@ -43,10 +43,10 @@ const Courses = () => {
     {
       field: "price",
       headerName: "Price",
-      headerAlign: "right",
       type: "currency",
-      align: "right",
       valueFormatter: (value) => `$${value}`,
+      align: "right",
+      cellClassName: "name-column--cell",
     },
     // {
     //   field: "accessLevel",
@@ -83,7 +83,7 @@ const Courses = () => {
 
   return (
     <Box m="20px">
-      <Header title="COURSES" subtitle="Manage Courses" />
+      <Header title="REVIEW REQUESTS" subtitle="Review Courses" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -119,4 +119,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default ReviewCourses;

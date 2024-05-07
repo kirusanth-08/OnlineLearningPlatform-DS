@@ -7,10 +7,11 @@ import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import PaidIcon from '@mui/icons-material/Paid';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SchoolIcon from '@mui/icons-material/School';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -94,6 +95,13 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
+              title="Course Reviews"
+              to="/reviewcourses"
+              icon={<RemoveRedEyeIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Manage Courses"
               to="/courses"
               icon={<SchoolIcon />}
@@ -108,19 +116,19 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Invoices Balances"
+              title="Course Payments"
               to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<PaidIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Profile Form"
               to="/form"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="FAQ Page"
               to="/faq"
