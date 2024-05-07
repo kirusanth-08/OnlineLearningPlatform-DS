@@ -10,6 +10,8 @@ import FAQ from "./scenes/faq";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import ReviewCourses from "./scenes/ReviewCourses";
+import ViewCourse from "./scenes/Courses/ViewCourse";
+import EditCourse from "./scenes/Courses/EditCourse";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -29,6 +31,8 @@ function App() {
               <Route path="/payments" element={<Payments />} />
               <Route path="/form" element={<Form />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/course/:id" element={<ViewCourse />} />
+              <Route path="/modifycourse/:id" element={<EditCourse />} />
             </Routes>
           </main>
         </div>
