@@ -1,83 +1,111 @@
-import { Box, Typography, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
-import { tokens } from "../../theme";
-import { mockDataPayments } from "../../data/mockData";
-import Header from "../../components/Header";
+import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import Header from '../../components/Header';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
-const Payments = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+const Payment = () => {
+  const [payment, setPayment] = useState([]);
+
+  useEffect(() => {
+    const fetchPayment = async () => {
+      try {
+        const response = await axios.get('http://localhost:8084/api/payment/all');
+        setPayment(response.data.payment);
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      }
+    };
+    fetchPayment();
+  }, []);
+
+  const handleDelete = (payID) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this payment!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:8084/api/payment/${payID}`)
+          .then(() => {
+            setPayment(prevPayment => prevPayment.filter(item => item._id !== payID));
+            Swal.fire({
+              icon: 'success',
+              title: 'Payment Deleted',
+              text: 'The payment has been successfully deleted!',
+            });
+          })
+          .catch(error => {
+            console.error('Error deleting payment:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Failed to delete payment!',
+            });
+          });
+      }
+    });
+  };
+
+
+  const handleComplete = (payID) => {
+    axios.put(`http://localhost:8084/api/payment/${payID}`, { status: 'completed' })
+      .then(() => {
+        setPayment(prevPayment =>
+          prevPayment.map(item => item._id === payID ? { ...item, status: 'completed' } : item)
+        );
+        Swal.fire({
+          icon: 'success',
+          title: 'Payment Completed',
+          text: 'The payment has been successfully completed!',
+        });
+      })
+      .catch(error => {
+        console.error('Error completing payment:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to complete payment!',
+        });
+      });
+  };
+
   const columns = [
-    { field: "id", 
-      headerName: "ID",
-      type: "string",
-      flex: 1,
-    },
+    { field: '_id', headerName: 'ID' },
+    { field: 'courseName', headerName: 'Course', flex: 1 },
+    { field: 'name', headerName: 'Student', flex: 1 },
+    { field: 'amount', headerName: 'Amount', type: 'currency', flex: 1, valueFormatter: (value) => `$${value}` },
+    { field: 'date', headerName: 'Date', flex: 1 },
+    { field: 'status', headerName: 'Status', flex: 1 },
     {
-      field: "user",
-      headerName: "User ID",
+      field: 'actions',
+      headerName: 'Actions',
       flex: 1,
-      // cellClassName: "name-column--cell",
+      renderCell: (params) => (
+        <div>
+          <button style={{ marginLeft: '2px', background: 'green', color: 'white', border: 'none' }} onClick={() => handleComplete(params.row._id)}>complete</button>
+          <button style={{ marginLeft: '8px', background: 'red', color: 'white', border: 'none' }} onClick={() => handleDelete(params.row._id)}>Delete</button>
+        </div>
+      ),
     },
-    {
-      field: "amount",
-      headerName: "Amount",
-      flex: 1,
-      valueFormatter: (value) => `$${value}`,
-    },
-    {
-      field: "date",
-      headerName: "Date",
-      flex: 1,
-    },
-    // {
-    //   field: "status",
-    //   headerName: "Cost",
-    //   flex: 1,
-    // },
-    // {
-    //   field: "date",
-    //   headerName: "Date",
-    //   flex: 1,
-    // },
   ];
+
+  const getRowId = (row) => row._id; // Assuming _id is the unique identifier for each row
 
   return (
     <Box m="20px">
-      <Header title="PAYMETNS RECEIVED" subtitle="List of Payments Received" />
-      <Box
-        m="40px 0 0 0"
-        height="75vh"
-        sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
-          },
-          "& .name-column--cell": {
-            color: colors.greenAccent[300],
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
-          },
-          "& .MuiCheckbox-root": {
-            color: `${colors.greenAccent[200]} !important`,
-          },
-        }}
-      >
-        <DataGrid checkboxSelection rows={mockDataPayments} columns={columns} />
+      <Header title="PAYMENTS RECEIVED" subtitle="List of Payments Received" />
+      <Box m="40px 0 0 0" height="75vh">
+        <DataGrid rows={payment} columns={columns} getRowId={getRowId} />
       </Box>
     </Box>
   );
 };
 
-export default Payments;
+export default Payment;

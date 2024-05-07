@@ -57,9 +57,11 @@ export default function PayPal({price , title,userID,courseID}) {
 
       const payments={
         user : localStorage.getItem('id'),
+        name : localStorage.getItem('name'),
         course_id:courseID,
         amount:price,
-        status : status
+        status : status,
+        courseName:title
       }
       const updatePayment={
         status : 'active'
