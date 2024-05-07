@@ -4,15 +4,15 @@ const User = require('../models/User');
 const adminController ={
     //get all instructor
     getAllinstructor :  async(req,res)=>{
-        //first validate admin
-        if(req.user.role !== 'admin') return res.status(403).json({ message: 'Forbidden. Only Admin view instructor.'});
-
+        // //first validate admin
+        // if(req.user.role !== 'admin') return res.status(403).json({ message: 'Forbidden. Only Admin view instructor.'});
+       
         try{
-            const instructor = await User.find({role : 'instructor', isApproved : 'true'})
-            res.json(instructor)
+            const instructor = await User.find({instructor : 'true'})
+            res.json({message : instructor})
         }
         catch(err){
-            res.status(500).json({ message: 'Internal Server Error' });
+            res.status(500).json({ error: 'Internal Server Error' });
         }
         
     },
