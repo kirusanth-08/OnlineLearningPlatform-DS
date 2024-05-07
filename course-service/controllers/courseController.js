@@ -59,6 +59,27 @@ const courseController = {
         }
 
     },
+    updateCourseStatus: async (req, res) => {
+         
+        try {
+            const courseId = req.params.id;
+            const  isApprove  = req.body.isApproved;
+
+            let course = await Course.findById(courseId);
+
+
+            if (!course) {
+                return res.status(404).json({ error: 'Course not found' });
+            }
+            course.isApproved = isApprove
+            await course.save();
+            res.status(200).json({ message: 'Course Status updated successfully', course });
+        } catch (error) {
+            console.error('Error updating course:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+
+    },
     deleteCourse: async (req, res) => {
         try {
             const courseId = req.params.id;
@@ -80,6 +101,17 @@ const courseController = {
         try {
 
             const courses = await Course.find({isApproved : true});
+
+            res.json({ course : courses });
+        } catch (error) {
+            console.error('Error fetching courses:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    },
+    viewCourses: async (req, res) => {
+        try {
+
+            const courses = await Course.find({isApproved : false});
 
             res.json({ course : courses });
         } catch (error) {
