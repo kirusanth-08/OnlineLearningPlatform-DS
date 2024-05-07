@@ -9,7 +9,6 @@ import Form from "./scenes/form";
 import FAQ from "./scenes/faq";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import ReviewCourses from "./scenes/ReviewCourses";
 import ViewCourse from "./scenes/Courses/ViewCourse";
 import EditCourse from "./scenes/Courses/EditCourse";
 

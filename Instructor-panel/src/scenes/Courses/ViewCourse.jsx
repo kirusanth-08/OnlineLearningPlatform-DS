@@ -54,7 +54,7 @@ const ViewCourse = () => {
           color: colors.grey[100],
           position: "relative",
           ":hover": {
-            backgroundColor: colors.primary[500],
+            backgroundColor: "transparent",
           },
         }}
       >

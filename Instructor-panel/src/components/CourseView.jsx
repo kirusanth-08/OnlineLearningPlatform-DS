@@ -19,7 +19,7 @@ const CourseView = ({ id, title, description, status }) => {
           marginBottom: theme.spacing(2),
           position: "relative",
           ":hover": {
-            backgroundColor: colors.primary[500],
+            backgroundColor: "transparent",
           },
         }}
       >

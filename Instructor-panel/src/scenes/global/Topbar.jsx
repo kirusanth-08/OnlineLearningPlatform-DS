@@ -4,9 +4,8 @@ import { ColorModeContext, tokens } from "../../theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import Badge from "@mui/material/Badge";
-import LogoutIcon from '@mui/icons-material/Logout';
+import Profile from "../../components/Profile";
 
 const Topbar = () => {
   const theme = useTheme();
@@ -120,10 +119,7 @@ const Topbar = () => {
           </div>
         )}
         <IconButton>
-          <LogoutIcon />
-        </IconButton>
-        <IconButton>
-          <PersonOutlinedIcon />
+          <Profile />
         </IconButton>
       </Box>
     </Box>
