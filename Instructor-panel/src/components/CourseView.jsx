@@ -10,10 +10,6 @@ const CourseView = ({ id, title, description, status }) => {
   return (
     <Link
       to={`/course/${id}`}
-      sx={{
-        textDecoration: "none",
-        color: "inherit",
-      }}
     >
       <Card
         sx={{
