@@ -91,7 +91,7 @@ const PopupCourseCreation = ({onClose}) => {
           <input type="number" placeholder="Enter price" name="ppc" id="psw" {...register('ppc')} />
           <small style={{color:'red'}}>{errors.ppc?.message}<br/></small>
 
-          <label for="psw"><b>duration</b></label>
+          <label for="psw"><b>duration(hours)</b></label>
           <input type="number" placeholder="Enter price" name="duration" id="psw" {...register('duration')} />
           <small style={{color:'red'}}>{errors.duration?.message}<br/></small>
 
