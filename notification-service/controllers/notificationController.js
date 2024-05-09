@@ -1,56 +1,66 @@
 const Notification = require('../models/Notification');
 
-exports.getNotifications = async (req, res) => {
-  try {
-    const notifications = await Notification.find();
-    res.status(200).json(notifications);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+// Controller functions
+module.exports = {
+  // Create a new notification
+  createNotification: async (req, res) => {
+    try {
+      const { userId, message, type } = req.body;
 
-exports.getNotification = async (req, res) => {
-  try {
-    const notification = await Notification.findById(req.params.id);
-    if (notification == null) {
-      return res.status(404).json({ message: 'Cannot find notification' });
+      // Create a new notification
+      const notification = new Notification({
+        userId,
+        message,
+        type,
+        status: 'sent', // Initial status
+      });
+
+      // Save the notification to the database
+      await notification.save();
+
+      res.status(201).json({ success: true, notification });
+    } catch (error) {
+      console.error('Error creating notification:', error);
+      res.status(500).json({ success: false, error: 'Internal server error' });
     }
-    res.status(200).json(notification);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+  },
 
-exports.createNotification = async (req, res) => {
-  const notification = new Notification({
-    date: req.body.date,
-    title: req.body.title,
-    description: req.body.description,
-    status: req.body.status,
-  });
+  // Get all notifications for a user
+  getNotificationsByUser: async (req, res) => {
+    try {
+      const { userId } = req.params;
 
-  try {
-    const newNotification = await notification.save();
-    res.status(201).json(newNotification);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-};
+      // Find notifications by userId
+      const notifications = await Notification.find({ userId });
 
-exports.updateNotification = async (req, res) => {
-  try {
-    const updatedNotification = await Notification.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json(updatedNotification);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-};
+      res.status(200).json({ success: true, notifications });
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+      res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+  },
 
-exports.deleteNotification = async (req, res) => {
-  try {
-    await Notification.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: 'Notification deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  // Update notification status
+  updateNotificationStatus: async (req, res) => {
+    try {
+      const { notificationId } = req.params;
+      const { status } = req.body;
+
+      // Find the notification by ID and update its status
+      const notification = await Notification.findByIdAndUpdate(
+        notificationId,
+        { status },
+        { new: true }
+      );
+
+      if (!notification) {
+        return res.status(404).json({ success: false, error: 'Notification not found' });
+      }
+
+      res.status(200).json({ success: true, notification });
+    } catch (error) {
+      console.error('Error updating notification status:', error);
+      res.status(500).json({ success: false, error: 'Internal server error' });
+    }
   }
 };

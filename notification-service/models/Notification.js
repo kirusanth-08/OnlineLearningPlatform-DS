@@ -1,25 +1,34 @@
+// notificationModel.js
+
 const mongoose = require('mongoose');
 
+// Define the Notification schema
 const notificationSchema = new mongoose.Schema({
-  date: {
-    type: Date,
-    required: true,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
-  title: {
+  message: {
     type: String,
-    required: true,
+    required: true
   },
-  description: {
+  type: {
     type: String,
-    required: true,
+    required: true
   },
   status: {
     type: String,
-    enum: ['seen', 'not seen'],
-    default: 'not seen',
+    enum: ['sent', 'delivered', 'read', 'completed'],
+    default: 'sent'
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
+// Create Notification model from schema
 const Notification = mongoose.model('Notification', notificationSchema);
 
 module.exports = Notification;
