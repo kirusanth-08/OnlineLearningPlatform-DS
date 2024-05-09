@@ -76,7 +76,45 @@ const enrollmentController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    }
+    },
+
+    getEnrollmentCount: async (req, res) => {
+        try {
+            const count = await Enrollment.countDocuments();
+            res.json({ count });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
+    getEnrollmentCountLastWeek: async (req, res) => {
+        try {
+            const lastWeekStart = new Date();
+            lastWeekStart.setDate(lastWeekStart.getDate() - 7); // Calculate the date 7 days ago
+
+            const count = await Enrollment.aggregate([
+                {
+                    $match: {
+                        enrollment_date: {
+                            $gte: lastWeekStart, // Filter for enrollment dates greater than or equal to last week start date
+                            $lte: new Date() // Filter for enrollment dates less than or equal to current date (today)
+                        }
+                    }
+                },
+                {
+                    $group: {
+                        _id: null,
+                        count: { $sum: 1 } // Count the documents in the filtered result
+                    }
+                }
+            ]);
+
+            const totalCount = count.length > 0 ? count[0].count : 0;
+            res.json({ count: totalCount });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
 
 //     enrolledCourses: async (req, res) => {
 //     try {
