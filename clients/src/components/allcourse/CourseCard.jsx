@@ -33,6 +33,7 @@ import CoursePopup from '../course/CoursePopup'
   }, []);
 
   const openModal = (courseID) => {
+    {!localStorage.getItem('authtoken') && navigate('/login')}
     setCourseModals({ ...courseModals, [courseID]: true });
   };
 
@@ -64,7 +65,7 @@ import CoursePopup from '../course/CoursePopup'
                 <div className='details'>
                   <div className='box'>
                     <div className='dimg'>
-                      <img src={val.instructor_id.profile_picture} alt='' />
+                      <img src='https://www.khalqfoundation.org/assets/images/default.png' alt='' />
                     </div>
                     <div className='para'>
                       <h4>{val.instructor_id.username}</h4>

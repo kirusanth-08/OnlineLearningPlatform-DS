@@ -5,16 +5,16 @@ const courseController = {
         
         try {
              
-            const { title, description, instructor_id, priceAll, pricePer,dcover,name} = req.body;
+            const { title, description, instructor_id, priceAll, pricePer ,duration} = req.body;
 
-        
+             
             const newCourse = new Course({
                 title,
                 description,
                 instructor_id,
                 priceAll,
                 pricePer,
-                 
+                duration
                 
             });
 
@@ -59,6 +59,27 @@ const courseController = {
         }
 
     },
+    updateCourseStatus: async (req, res) => {
+         
+        try {
+            const courseId = req.params.id;
+            const  isApprove  = req.body.isApproved;
+
+            let course = await Course.findById(courseId);
+
+
+            if (!course) {
+                return res.status(404).json({ error: 'Course not found' });
+            }
+            course.isApproved = isApprove
+            await course.save();
+            res.status(200).json({ message: 'Course Status updated successfully', course });
+        } catch (error) {
+            console.error('Error updating course:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+
+    },
     deleteCourse: async (req, res) => {
         try {
             const courseId = req.params.id;
@@ -81,6 +102,17 @@ const courseController = {
 
             const courses = await Course.find({isApproved : true});
             console.log(courses)
+            res.json({ course : courses });
+        } catch (error) {
+            console.error('Error fetching courses:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    },
+    viewCourses: async (req, res) => {
+        try {
+
+            const courses = await Course.find({isApproved : false});
+
             res.json({ course : courses });
         } catch (error) {
             console.error('Error fetching courses:', error);
