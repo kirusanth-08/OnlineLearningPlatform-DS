@@ -11,7 +11,7 @@ const Courses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:8082/api/course/view');
+        const response = await axios.get('http://localhost:8082/api/course/viewF');
         const coursesData = response.data.course.map(course => ({
           ...course,
           instructor_id: course.instructor_id.username // Replace instructor_id with username
@@ -104,7 +104,7 @@ const handleDelete = (courseId) => {
       renderCell: (params) => (
         <div >
           <button style={{marginLeft:'2px' , background : 'green' , color:'white' ,border:'none'}} onClick={() => handleApprove(params.row._id)}>Approve</button>
-          <button style={{marginLeft:'8px', background : 'red' , color:'white' ,border:'none'}} onClick={() => handleDelete(params.row._id)}>Delete</button>
+          <button style={{marginLeft:'8px', background : 'red' , color:'white' ,border:'none'}} onClick={() => handleDelete(params.row._id)}>Reject</button>
         </div>
       ),
     },
