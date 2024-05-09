@@ -97,18 +97,27 @@ const courseController = {
             res.status(500).json({ error: 'Internal server error' });
         }
     },
-    viewAllCourse: async (req, res) => {
+    viewApprovedCourses: async (req, res) => {
         try {
 
             const courses = await Course.find({isApproved : true});
-            console.log(courses)
             res.json({ course : courses });
         } catch (error) {
             console.error('Error fetching courses:', error);
             res.status(500).json({ error: 'Internal server error' });
         }
     },
-    viewCourses: async (req, res) => {
+    viewAllCourse: async (req, res) => {
+        try {
+
+            const courses = await Course.find();
+            res.json({ course : courses });
+        } catch (error) {
+            console.error('Error fetching courses:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    },
+    viewNotApproved: async (req, res) => {
         try {
 
             const courses = await Course.find({isApproved : false});

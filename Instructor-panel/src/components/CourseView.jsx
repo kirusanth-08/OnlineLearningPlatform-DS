@@ -4,7 +4,7 @@ import { tokens } from "../theme";
 import { Link } from "react-router-dom";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 
-const CourseView = ({ id, title, description, status }) => {
+const CourseView = ({ id, title, description, isApproved }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -39,7 +39,7 @@ const CourseView = ({ id, title, description, status }) => {
               padding: theme.spacing(1),
             }}
           >
-            {status}
+            {isApproved ? "Approved" : "Pending"}
           </Typography>
           <Link to={`/modifycourse/${id}`}>
             <Button

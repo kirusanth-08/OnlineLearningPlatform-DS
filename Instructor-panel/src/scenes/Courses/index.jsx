@@ -16,13 +16,13 @@ const Courses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:8082/api/course/viewAll'); // replace with your API endpoint
-        setCourses(response.data);
+        const response = await axios.get('http://localhost:8082/api/course/view');
+        setCourses(response.data.course);
+        console.log(response.data.course);
       } catch (error) {
         console.error('Failed to fetch courses:', error);
       }
     };
-    console.log(courses);
     fetchCourses();
   }, []);
 
@@ -39,28 +39,10 @@ const Courses = () => {
         m="40px 0 0 0"
         height="75vh"
       >
-        <Stack spacing={2}>
-            <CourseView 
-              id="1"
-              title="Course 1"
-              description="Course Description"
-              status="Active"
-            />
-            <CourseView 
-              id="1"
-              title="Course 1"
-              description="Course Description"
-              status="Active"
-            />
-            <CourseView 
-              id="1"
-              title="Course 1"
-              description="Course Description"
-              status="Active"
-            />
-            {/* {courses.map(course => (
+        <Stack spacing={0}>
+            {courses.map(course => (
             <CourseView key={course.id} {...course} />
-          ))} */}
+          ))}
         </Stack>
       </Box>
     </Box>
