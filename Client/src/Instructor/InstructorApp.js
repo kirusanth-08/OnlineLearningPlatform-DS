@@ -12,7 +12,7 @@ import { ColorModeContext, useMode } from "./theme";
 import ViewCourse from "./scenes/Courses/ViewCourse";
 import EditCourse from "./scenes/Courses/EditCourse";
 
-function App() {
+function InstructorApp() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
@@ -40,4 +40,4 @@ function App() {
   );
 }
 
-export default App;
+export default InstructorApp;

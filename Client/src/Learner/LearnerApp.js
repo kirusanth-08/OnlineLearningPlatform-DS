@@ -14,11 +14,10 @@ import Signup from './components/login/Signup';
 import Teach from './components/Teach/Teach';
 
 import {AuthContext} from './components/helpers/AuthContext'
-//////////////////////////////////////////////////////////////////////
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import MyLearning from './components/Mylearnings/MyLearning';
-  function App() {
+  function LearnerApp() {
     const [authState , setAuthstate] = useState({
       username : '',
       id : '',
@@ -58,7 +57,7 @@ import MyLearning from './components/Mylearnings/MyLearning';
     return (
       <div>
         <AuthContext.Provider value={{authState , setAuthstate}}>
-        <Router>
+        {/* <Router> */}
             <Header /> 
              <Link to ='/login' />
           <Routes>
@@ -71,13 +70,12 @@ import MyLearning from './components/Mylearnings/MyLearning';
             <Route  path='/teach'  element={<Teach/>} />
             <Route  path='/leanings'  element={<MyLearning/>} />
 
-
           </Routes>         
           <Footer/>
-        </Router>
+        {/* </Router> */}
         </AuthContext.Provider >
       </div>
     );
   }
 
-export default App;
+export default LearnerApp;

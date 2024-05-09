@@ -6,6 +6,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import Badge from "@mui/material/Badge";
 import Profile from "../../components/Profile";
+import { Link } from "react-router-dom";
 
 const Topbar = () => {
   const theme = useTheme();
@@ -41,7 +42,7 @@ const Topbar = () => {
     <Box display="flex" justifyContent="end" p={2}>
       {/* ICONS */}
       <Box display="flex">
-        {/* <link to=""> Learner</link> */}
+        <Link to="/"> Learner</Link>
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
