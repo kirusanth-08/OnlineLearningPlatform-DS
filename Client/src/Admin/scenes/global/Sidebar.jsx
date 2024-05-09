@@ -89,35 +89,35 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to="/admin/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Course Reviews"
-              to="/reviewcourses"
+              to="/admin/reviewcourses"
               icon={<RemoveRedEyeIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Manage Courses"
-              to="/courses"
+              to="/admin/courses"
               icon={<SchoolIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Instructors"
-              to="/instructors"
+              to="/admin/instructors"
               icon={<CastForEducationIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Course Payments"
-              to="/payments"
+              to="/admin/payments"
               icon={<PaidIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -131,7 +131,7 @@ const Sidebar = () => {
             /> */}
             <Item
               title="FAQ Page"
-              to="/faq"
+              to="/admin/faq"
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
