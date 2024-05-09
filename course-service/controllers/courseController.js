@@ -80,7 +80,7 @@ const courseController = {
         try {
 
             const courses = await Course.find({isApproved : true});
-
+            console.log(courses)
             res.json({ course : courses });
         } catch (error) {
             console.error('Error fetching courses:', error);

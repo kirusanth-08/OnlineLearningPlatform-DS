@@ -41,6 +41,7 @@ const Topbar = () => {
     <Box display="flex" justifyContent="end" p={2}>
       {/* ICONS */}
       <Box display="flex">
+        {/* <link to=""> Learner</link> */}
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />

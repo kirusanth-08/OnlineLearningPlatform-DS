@@ -13,6 +13,7 @@ import CreateContentPopup from "../../components/CreateContentPopup";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { Link } from "react-router-dom";
 import EditContentPopup from "../../components/EditContentPopup";
+import CreateCourse from "../../components/CreateCourse";
 
 const ViewCourse = () => {
   const fileName = "pdf1.pdf";
@@ -93,7 +94,6 @@ const ViewCourse = () => {
           </Box>
         </AccordionDetails>
       </Accordion>
-
       <CreateContentPopup />
     </Box>
   );
