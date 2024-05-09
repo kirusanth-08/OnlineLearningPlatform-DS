@@ -3,6 +3,7 @@ const Enrollment = require('../models/enrollment');
 const enrollmentController = {
     // Function to enroll a user in a course
     enrollCourse: async (req, res) => {
+          
         try {
             const { courseId, userId } = req.body;
 
@@ -29,6 +30,13 @@ const enrollmentController = {
             await enrollment.save();
 
             res.status(201).json(enrollment);
+            const alreadyEnrolled = await Enrollment.find({ user_id: req.body.user_id, course_id: req.body.course_id });
+            if (alreadyEnrolled.length > 0) {
+                return res.json({ message: 'Already enrolled' });
+            }    
+            const enrollment = new Enrollment(req.body);
+            await enrollment.save();
+            res.status(201).json({enroll : enrollment});
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
@@ -65,6 +73,29 @@ const enrollmentController = {
     },
 
     // Function to get all enrollments
+    updateEnrollStatus: async (req, res) => {
+        try {
+            const alreadyEnrolled = await Enrollment.find({ course_id: req.params.courseId, user_id: req.params.studentId });
+           
+             
+            if (!alreadyEnrolled || alreadyEnrolled.length === 0) {
+                return res.json({ message: 'You have not enrolled in this course yet.' });
+            }
+    
+            const updateStatus = req.body.status;
+    
+            // Iterate over each enrollment and update its status
+            for (let enrollment of alreadyEnrolled) {
+                enrollment.status = updateStatus;
+                await enrollment.save();
+            }
+    
+            res.status(200).json({ message: 'Enrollment status updated successfully.' });
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    },
+    
     getEnrollments: async (req, res) => {
         try {
             const enrollments = await Enrollment.find();
@@ -98,6 +129,7 @@ const enrollmentController = {
 
     // Function to unenroll a user from a course
     unEnrollCourse: async (req, res) => {
+        // res.send('unEnrolled')
         try {
             await Enrollment.findByIdAndDelete(req.params.id);
             res.json({ message: 'Deleted Enrollment' });

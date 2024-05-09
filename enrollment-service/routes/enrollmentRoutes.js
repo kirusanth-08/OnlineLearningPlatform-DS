@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const enrollmentController = require('../controllers/enrollmentController');
 
+
 // Route to enroll a user in a course
 router.post('/', enrollmentController.enrollCourse);
 
 // Route to get all enrollments
+router.post('/enroll', enrollmentController.enrollCourse);
+router.put('/enroll/:courseId/:studentId',enrollmentController.updateEnrollStatus)
 router.get('/', enrollmentController.getEnrollments);
 
 // Route to get all enrolled students for a course

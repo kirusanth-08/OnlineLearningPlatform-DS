@@ -48,7 +48,7 @@ const Header = () => {
             {!authState.status ?
               <div className='button'>GET COURSE</div>
               :
-              <div className='button' style={{ textTransform: 'uppercase' }}>{authState.username}</div>
+              <div className='button' style={{ textTransform: 'uppercase' }}>{localStorage.getItem('name')}</div>
             }
 
           </div>
