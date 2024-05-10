@@ -41,7 +41,7 @@ const CourseView = ({ _id, title, description, isApproved }) => {
           >
             {isApproved ? "Approved" : "Pending"}
           </Typography>
-          <Link to={`/modifycourse/${_id}`}>
+          <Link to={`/instructor/modifycourse/${_id}`}>
             <Button
               variant="contained"
               color="secondary"
