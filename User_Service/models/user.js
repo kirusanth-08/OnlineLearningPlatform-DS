@@ -19,12 +19,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // role: {
-    //     type: String,
-    //     default : 'student'
-    //     // required: true,
-    //     // enum: ['student', 'instructor','admin']
-    // },
+    role: {
+        type: String,
+        default : ''
+        // required: true,
+        // enum: ['student', 'instructor','admin']
+    },
     profile_picture :{
         type: String,
         default: 'https://www.khalqfoundation.org/assets/images/default.png' 
