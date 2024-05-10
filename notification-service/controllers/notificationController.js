@@ -22,12 +22,17 @@ exports.getNotification = async (req, res) => {
 };
 
 exports.createNotification = async (req, res) => {
-  const notification = new Notification({
-    date: req.body.date,
-    title: req.body.title,
-    description: req.body.description,
-    status: req.body.status,
-  });
+  try{
+     const notification = new Notification({
+      date: req.body.date,
+      title: req.body.title,
+      description: req.body.description,
+       
+    });
+  }catch(err){
+    res.status(500).json({ error: err.message });
+  }
+  
 
   try {
     const newNotification = await notification.save();

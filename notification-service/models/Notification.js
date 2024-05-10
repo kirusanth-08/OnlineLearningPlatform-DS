@@ -13,11 +13,11 @@ const notificationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  status: {
-    type: String,
-    enum: ['seen', 'not seen'],
-    default: 'not seen',
-  },
+  // status: {
+  //   type: String,
+  //   enum: ['seen', 'not seen'],
+  //   default: 'not seen',
+  // },
 });
 
 const Notification = mongoose.model('Notification', notificationSchema);
