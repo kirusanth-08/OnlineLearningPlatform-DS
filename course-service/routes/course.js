@@ -9,5 +9,6 @@ router.get('/viewAll',courseController.viewApprovedCourses)
 router.get('/view',courseController.viewAllCourse)
 router.get('/viewF',courseController.viewNotApproved)
 router.get('/:id',courseController.viewCourse)
+router.post('/myCourses',courseController.viewInstructorCourse)
 
 module.exports = router 

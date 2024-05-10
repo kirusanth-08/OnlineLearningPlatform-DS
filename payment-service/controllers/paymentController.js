@@ -57,7 +57,29 @@ const paymentController = {
     } catch (err) {
       res.status(500).json(err);
     }
+  },
+
+  getMyPayments: async (req, res) => {
+    try {
+      const instructorId = req.body.instructor;
+      console.log(instructorId)
+      const payments = await Payment.find().populate({
+        path: 'course_id',
+        match: { instructor_id: instructorId },
+      });
+
+      console.log(payments[0].course_id.instructor_id)
+      // console.log(payments)
+
+      // Filter out payments where course_id is null (i.e., instructor_id didn't match)
+      // const filteredPayments = payments.filter(payment => payment.course_id !== null);
+      // console.log(filteredPayments)
+
+      res.status(200).json(payments);
+    } catch (err) {
+      res.status(500).json({error : err});
+    }
   }
-};
+}
 
 module.exports = paymentController;
