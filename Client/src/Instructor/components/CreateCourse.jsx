@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import {
   Button,
@@ -19,18 +19,22 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { tokens } from "../theme";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { AuthzContext } from "../components/Helper";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateCourse({ id, titleProp, descriptionProp }) {
-
+export default function CreateCourse() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { authState } = useContext(AuthzContext);
   const [open, setOpen] = React.useState(false);
-  const [title, setTitle] = useState(titleProp);
-  const [description, setDescription] = useState(descriptionProp);
+  const [coursePriceAll, setCoursePriceAll] = useState();
+  const [coursePricePer, setCoursePricePer] = useState();
+  const [courseTitle, setTitle] = useState();
+  const [courseDuration, setDuration] = useState();
+  const [courseDesc, setDescription] = useState();
 
 
   const handleClickOpen = () => {
@@ -40,10 +44,19 @@ export default function CreateCourse({ id, titleProp, descriptionProp }) {
   const handleClose = () => {
     setOpen(false);
   };
-
-  
+  // console.log(authState)
   const handleRequest = () => {
-    axios.create(`your-api-url/${id}`, { title, description })
+    axios.post(`http://localhost:8082/api/course/create/`, { 
+      instructor_id:{
+        id:authState.id, 
+        username:authState.name
+      }, 
+      title:courseTitle, 
+      description: courseDesc, 
+      priceAll:coursePriceAll, 
+      pricePer: coursePricePer, 
+      duration: courseDuration 
+    })
       .then(response => {
         console.log(response.data);
         handleClose();
@@ -101,21 +114,65 @@ export default function CreateCourse({ id, titleProp, descriptionProp }) {
               <ListItemText
                 primary="Topic"
                 secondary={
-                  <TextField label="Enter Topic" fullWidth margin="normal" value={title} onChange={e => setTitle(e.target.value)} />
+                  <TextField label="Enter Topic" fullWidth margin="normal" value={courseTitle} onChange={e => setTitle(e.target.value)} />
                 }
                 />
               <Divider />
               <ListItemText
                 primary="Description"
                 secondary={
-                  <TextField label="Enter Description" fullWidth margin="normal" value={description} onChange={e => setDescription(e.target.value)} />
+                  <TextField label="Enter Description" fullWidth margin="normal" value={courseDesc} onChange={e => setDescription(e.target.value)} />
                 }
                 />
-              <ListItemText
+              <Divider />
+              {/* <ListItemText
                 primary="Description"
                 secondary={
                   <TextField label="Enter Description" fullWidth margin="normal" value={description} onChange={e => setDescription(e.target.value)} />
                 }
+                /> */}
+
+              <Divider />
+                <ListItemText
+                  primary="Course Price "
+                  secondary={
+                    <TextField 
+                    type="number"
+                    label="Enter Course price per month" 
+                    // fullWidth 
+                    margin="normal" 
+                    value={coursePriceAll} 
+                    onChange={e => setCoursePriceAll(e.target.value)}
+                    />
+                  }
+                />
+                  <Divider />
+                <ListItemText
+                  primary="Course Price"
+                  secondary={
+                    <TextField 
+                      type="number"
+                      label="Enter Course Price per class" 
+                      // fullWidth 
+                      margin="normal" 
+                      value={coursePricePer} 
+                      onChange={e => setCoursePricePer(e.target.value)}
+                    />
+                  }
+                />
+                <Divider />
+                <ListItemText
+                  primary="Course Duration(hours)"
+                  secondary={
+                    <TextField 
+                      type="number"
+                      label="Enter course duration in hour" 
+                      // fullWidth 
+                      margin="normal" 
+                      value={courseDuration} 
+                      onChange={e => setDuration(e.target.value)}
+                    />
+                  }
                 />
             </Box>
           </List>

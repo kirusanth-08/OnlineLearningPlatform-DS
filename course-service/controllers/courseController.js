@@ -2,12 +2,8 @@ const { model } = require('mongoose');
 const Course = require('../models/Course')
 const courseController = {
     createCourse: async (req, res) => {
-        
         try {
-             
             const { title, description, instructor_id, priceAll, pricePer ,duration} = req.body;
-
-             
             const newCourse = new Course({
                 title,
                 description,
@@ -15,10 +11,7 @@ const courseController = {
                 priceAll,
                 pricePer,
                 duration
-                
             });
-
-
              
             await newCourse.save();
 

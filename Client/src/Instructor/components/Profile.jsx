@@ -7,7 +7,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import InboxIcon from '@mui/icons-material/Inbox';
 import { IconButton } from "@mui/material";
 import Swal from 'sweetalert2'
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -90,7 +89,6 @@ export default function Profile() {
             </ListItem>
           </List>
         </nav>
-
       </Popover>
     </div>
   );

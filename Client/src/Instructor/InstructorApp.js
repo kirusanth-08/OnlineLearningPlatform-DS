@@ -18,7 +18,7 @@ function InstructorApp() {
   const [isSidebar, setIsSidebar] = useState(true);
   const [authState, setAuthState] = useState({
     id: localStorage.getItem('id'),
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('authtoken'),
     name: localStorage.getItem('name'),
   })
 
