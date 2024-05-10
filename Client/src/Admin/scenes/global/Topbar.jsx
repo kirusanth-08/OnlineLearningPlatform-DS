@@ -7,6 +7,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import { Badge as BaseBadge, badgeClasses } from '@mui/base/Badge';
+import Profile from "../../components/Profile";
 
 const Topbar = () => {
   const theme = useTheme();
@@ -32,7 +33,7 @@ const Topbar = () => {
           <SettingsOutlinedIcon />
         </IconButton>
         <IconButton>
-          <PersonOutlinedIcon />
+         <Profile/>
         </IconButton>
       </Box>
     </Box>

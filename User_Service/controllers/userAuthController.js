@@ -63,7 +63,9 @@ const userAuthController = {
     //     expires: new Date(Date.now() +  5 * 60 * 1000), // Set expiry time to 10 minutes from now
     // });
 
-        res.send({token : token , username : user.username , id : user._id , instructor : user.instructor});
+        res.send({token : token , username : user.username , id : user._id , instructor : user.instructor ,
+                    role : user.role
+        });
     },
 
 

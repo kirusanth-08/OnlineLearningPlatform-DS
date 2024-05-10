@@ -52,7 +52,13 @@ const Login = () => {
               instructor:res.data.instructor,
               status : true
             })
-            navigate('/courses')
+            if(res.data.role == 'admin'){
+              navigate('/admin')
+            }
+            else{
+
+              navigate('/courses')
+            }
         }
        })
     }
