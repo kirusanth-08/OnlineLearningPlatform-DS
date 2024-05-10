@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:20
 
 WORKDIR /app
 
@@ -6,8 +6,8 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 
-EXPOSE 8085
-
 COPY . .
 
-CMD ["node", "server.js"]
+EXPOSE 8082
+
+CMD ["npm", "run", "start"]
