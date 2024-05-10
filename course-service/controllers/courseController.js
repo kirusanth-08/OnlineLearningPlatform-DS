@@ -25,8 +25,7 @@ const courseController = {
     updateCourse: async (req, res) => {
         try {
             const courseId = req.params.id;
-            const { title, description, instructor_id, price, start_date } = req.body;
-
+            const { title, description, instructor_id, priceAll, pricePer ,duration} = req.body;
             let course = await Course.findById(courseId);
 
 
@@ -38,14 +37,15 @@ const courseController = {
             course.title = title;
             course.description = description;
             course.instructor_id = instructor_id;
-            course.price = price;
-            course.start_date = start_date;
-
+            course.priceAll = priceAll;
+            course.pricePer = pricePer;
+            course.duration = duration;
+            course.isApproved=false;
 
 
             await course.save();
 
-            res.status(200).json({ message: 'Course updated successfully', course });
+            res.status(200).json({ message: course });
         } catch (error) {
             console.error('Error updating course:', error);
             res.status(500).json({ error: 'Internal server error' });
@@ -143,7 +143,6 @@ const courseController = {
             const instructorId = req.body.instructor_id;
             console.log(instructorId)
             const courses = await Course.find({'instructor_id.id' : instructorId});
-            console.log(courses)
             res.json({ courses });
         } catch (error) {
             // console.error('Error fetching instructor courses:', error);
