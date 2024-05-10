@@ -18,7 +18,6 @@ const Courses = () => {
       try {
         const response = await axios.get('http://localhost:8082/api/course/view');
         setCourses(response.data.course);
-        console.log(response.data.course);
       } catch (error) {
         console.error('Failed to fetch courses:', error);
       }
@@ -41,7 +40,7 @@ const Courses = () => {
       >
         <Stack spacing={0}>
             {courses.map(course => (
-            <CourseView key={course.id} {...course} />
+            <CourseView key={course._id} {...course} />
           ))}
         </Stack>
       </Box>

@@ -4,7 +4,8 @@ html,
 body,
 #root,
 .app,
-.content {
+.mainContainer 
+{
   height: 100%;
   width: 100%;
   font-family: "Source Sans Pro", sans-serif;
@@ -37,4 +38,9 @@ body,
 Link, a {
   text-decoration: none;
   color: inherit;
+}
+
+.actionBtns {
+  margin-left:0px;
+   background : red ; color: white; border:none;
 }

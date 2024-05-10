@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import Header from '../../components/Header';
 import axios from 'axios';
@@ -8,6 +8,7 @@ const Courses = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
+
     const fetchCourses = async () => {
       try {
         const response = await axios.get('http://localhost:8082/api/course/viewAll');
@@ -71,7 +72,17 @@ const handleDelete = (courseId) => {
       renderCell: (params) => (
         <div >
         
-          <button style={{marginLeft:'8px', background : 'red' , color:'white' ,border:'none'}} onClick={() => handleDelete(params.row._id)}>Delete</button>
+          {/* <button className='actionBtns'}>Delete</button> */}
+          
+          <Button  onClick={() => handleDelete(params.row._id)}
+            sx={{
+              backgroundColor: "red",
+              color: "white",
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px",
+            }}
+          >Delete</Button>
         </div>
       ),
     },

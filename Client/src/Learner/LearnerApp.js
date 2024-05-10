@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 // <img src={logo} className="App-logo" alt="logo" />
-import './App.css';
+import './LearnerApp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/common/heading/Header';
 import { BrowserRouter as Router, Routes, Route ,Link } from 'react-router-dom'

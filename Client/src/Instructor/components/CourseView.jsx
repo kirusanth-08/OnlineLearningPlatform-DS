@@ -4,12 +4,12 @@ import { tokens } from "../theme";
 import { Link } from "react-router-dom";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 
-const CourseView = ({ id, title, description, isApproved }) => {
+const CourseView = ({ _id, title, description, isApproved }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
     <Link
-      to={`/course/${id}`}
+      to={`/instructor/course/${_id}`}
     >
       <Card
         sx={{
@@ -41,7 +41,7 @@ const CourseView = ({ id, title, description, isApproved }) => {
           >
             {isApproved ? "Approved" : "Pending"}
           </Typography>
-          <Link to={`/modifycourse/${id}`}>
+          <Link to={`/modifycourse/${_id}`}>
             <Button
               variant="contained"
               color="secondary"
