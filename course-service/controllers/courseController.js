@@ -73,7 +73,7 @@ const courseController = {
             }
             course.isApproved = isApprove
             await course.save();
-            res.status(200).json({ message: 'Course Status updated successfully', course });
+            res.status(200).json({ message: course });
         } catch (error) {
             console.error('Error updating course:', error);
             res.status(500).json({ error: 'Internal server error' });

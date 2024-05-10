@@ -49,21 +49,26 @@ const adminController ={
         }
 
     },
-    //remove student 
-   removeStudent : async(req,res)=>{
-        if(req.user.role !== 'admin') return res.status(403).json({ message: 'Forbidden. Only Admin view instructor.'}); 
+
+
+
+    //view student 
+   viewStudentByStuID : async(req,res)=>{
+        
         const studentId = req.params.id;
+        console.log(studentId)
         try {
             // Find and delete the instructor by ID
-            const result = await User.findByIdAndDelete(studentId);
+            const result = await User.find({_id : studentId});
             
             if (!result) {
-                return res.status(404).json({ message: 'student not found.' });
+                return res.status(404).json({ error: 'student not found.' });
             }
     
-            res.json({ message: 'student removed successfully.' });
+            res.json({ message: result});
+         
         } catch (err) {
-            res.status(500).json({ message: 'Internal Server Error' });
+            res.status(500).json({ error: 'Internal Server Error' });
         }
 
     },

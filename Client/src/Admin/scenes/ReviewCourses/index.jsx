@@ -4,7 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Header from '../../components/Header';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-
+import emailjs from 'emailjs-com';
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   
@@ -23,7 +23,63 @@ const Courses = () => {
     };
     fetchCourses();
   }, []);
+
+
+
+
+
+
+    // Function to send email using EmailJS
+    const sendApprovedEmail = (emailList) => {
+      emailList.forEach(({ email, username }) => {
+        const templateParams = {
+          to_email:email,
+          to_name: username, // Use the username as the recipient name
+          from_name: 'LEARNHUB', // Your name or the sender's name
+          title: 'course approved', // Email title
+          date: new Date().toDateString(), // Current date
+          description: `Dear ${username},\n\nYour course has been approved. Congratulations! You can now proceed with teaching your course on LearnHub.\n\nBest regards,\nLearnHub Team`
+
+        };
+    
   
+      // Send email using EmailJS
+      emailjs.send('service_3csklbk', 'template_6h0j0a4', templateParams, 'zmODVjugiCFyY9DWt')
+        .then((response) => {
+          console.log('Email sent successfully to:', email, 'Response:', response);
+          const notificationData = {
+            date : templateParams.date,
+            title : templateParams.title,
+            description : templateParams.description,
+            receiverName : templateParams.to_name,
+            receiverMail : templateParams.to_email
+
+          }
+          // console.log(templateParams.description)
+          // console.log(templateParams.date)
+          // console.log(templateParams.to_name)
+          // console.log(templateParams.to_email)
+          // console.log(templateParams.from_name)
+          // console.log(templateParams.title)
+          axios.post('http://localhost:8088/api/notifications/',{notificationData}).then((res)=>{
+            if(res.data.error){
+              console.log(res.data.error)
+            }else{
+              console.log(res.data.message)
+            }
+          }).catch((err)=> console.log(err))
+        })
+        .catch((error) => {
+          console.error('Error sending email to:', email, 'Error:', error);
+        });
+      })
+    };
+ 
+
+
+
+
+
 
 const handleApprove=(courseId)=>{
    
@@ -32,7 +88,8 @@ const handleApprove=(courseId)=>{
         console.log(res.data.error)
       }else{
 
-        console.log(res.data.message); // Log the success message from the server
+        console.log(res.data.message.instructor_id.id); // Log the success message from the server
+        const ID = res.data.message.instructor_id.id
         const updatedCourses = courses.map(course => {
           if (course._id === courseId) {
             return {
@@ -50,6 +107,25 @@ const handleApprove=(courseId)=>{
           title: 'Course Approved',
           text: 'The course has been successfully approved!',
         });
+
+
+        //fetch student email using student ID
+        axios.get(`http://localhost:8080/api/admin/student/${ID}`).then((res)=>{
+                  if(res.data.error){
+                    console.log(res.data.error)
+                  }else{
+                    const user = res.data.message
+                   
+                    
+                    const emailList = user.map(({ email, username }) => ({ email, username }));
+                      
+                    console.log(emailList)
+                     //send email 
+                     sendApprovedEmail(emailList);
+                  }
+        })
+
+
       }
     }).catch((err)=>{
       console.log(err)
