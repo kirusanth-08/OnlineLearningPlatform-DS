@@ -22,10 +22,12 @@ const ViewCourse = () => {
   const { id } = useParams();
   const [course, setCourse] = useState({});
 
+  console.log(useParams())
+
     useEffect(() => {
       const course = async () => {
         try {
-          const res = await axios.get(`http://localhost:8082/api/course/viewAll`)
+          const res = await axios.get(`http://localhost:8082/api/course/view`)
           console.log(res.data)
           console.log(res.data.course)
         } catch (error) {

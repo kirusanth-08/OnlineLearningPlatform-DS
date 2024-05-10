@@ -99,7 +99,6 @@ const courseController = {
     },
     viewApprovedCourses: async (req, res) => {
         try {
-
             const courses = await Course.find({isApproved : true});
             res.json({ course : courses });
         } catch (error) {
@@ -142,6 +141,20 @@ const courseController = {
             res.json({ course });
         } catch (error) {
             console.error('Error fetching course:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    },
+
+    viewInstructorCourse: async (req, res) => {
+        try {
+            const instructorId = req.body.instructor_id;
+            console.log(instructorId)
+            const courses = await Course.find({'instructor_id.id' : instructorId});
+            console.log(courses)
+            res.json({ courses });
+        } catch (error) {
+            // console.error('Error fetching instructor courses:', error);
+            console.error('Error fetching instructor courses:',);
             res.status(500).json({ error: 'Internal server error' });
         }
     }

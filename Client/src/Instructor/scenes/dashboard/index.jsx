@@ -9,10 +9,16 @@ import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../components/Header";
 import StatBox from "../../components/StatBox";
+import { useContext } from "react";
+import { AuthzContext } from "../../components/Helper";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { authState } = useContext(AuthzContext);
+
+  console.log("IJhaer"+ authState.id)
+
 
   return (
     <Box m="20px">

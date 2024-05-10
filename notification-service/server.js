@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const enrollmentRoutes = require('./routes/notificationRoutes'); // Assuming routes are in a 'routes' directory
+const notificationRoutes = require('./routes/notificationRoutes'); // Assuming routes are in a 'routes' directory
 const app = express();
 require('dotenv').config();
 
