@@ -131,7 +131,7 @@ const courseController = {
                 return res.json({ error: 'Course not found' });
             }
 
-            res.json({ course });
+            res.json({ course : course });
         } catch (error) {
             console.error('Error fetching course:', error);
             res.status(500).json({ error: 'Internal server error' });
