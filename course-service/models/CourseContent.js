@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 
 const courseContentSchema = new mongoose.Schema({
-    
-    instructor_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Referencing the User model
-                
-    },
     topic: {
         type: String,
         required: true
@@ -22,12 +16,10 @@ const courseContentSchema = new mongoose.Schema({
     lecture: {
         filename: String, // Original filename
         path: String // File path or URL
-        // You can add more fields if needed, such as size, MIME type, etc.
     },
     assignment: {
         filename: String, // Original filename
         path: String // File path or URL
-        // You can add more fields if needed, such as size, MIME type, etc.
     }
      
 });
