@@ -10,6 +10,7 @@ const Head = () => {
         localStorage.removeItem('authtoken')
         localStorage.removeItem('id')
         localStorage.removeItem('name')
+        localStorage.removeItem('instructor')
         setAuthstate({
             username : '',
             id : '',
