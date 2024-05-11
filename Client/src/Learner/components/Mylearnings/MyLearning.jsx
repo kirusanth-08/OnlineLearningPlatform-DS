@@ -48,6 +48,21 @@ const MyLearning = () => {
         })
     }, [])
 
+    const unEnroll =(ID)=>{
+        console.log('dddd '+ID)
+        const ids = {
+            user_id : localStorage.getItem('id'),
+            course_id : ID
+        }
+        axios.delete(`http://localhost:8085/api/enrollments/unEnroll`,{ data: ids }).then((res)=>{
+            if(res.data.error){
+                console.log(res.data.error)
+            }else{
+                console.log(res.data.message)
+            }
+        }).catch((err)=>console.log(err))
+    }
+
     return (
 
         <>
@@ -90,7 +105,7 @@ const MyLearning = () => {
                             </div>
                             <div className='unEnrollDiv'>
 
-                                <button className='unEnrollBtn'>UnEnroll</button>
+                                <button className='unEnrollBtn' onClick={()=>unEnroll(course.course_id)}>UnEnroll</button>
                             </div>
 
 
