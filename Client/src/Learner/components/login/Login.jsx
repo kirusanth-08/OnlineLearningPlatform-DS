@@ -52,6 +52,7 @@ const Login = () => {
               instructor:res.data.instructor,
               status : true
             })
+            localStorage.setItem('instructor',res.data.instructor)
             if(res.data.role == 'admin'){
               navigate('/admin')
             }
