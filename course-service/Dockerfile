@@ -1,13 +1,20 @@
+# Use a base Node.js image
 FROM node:20
 
-WORKDIR /app
+# Set the working directory inside the container
+WORKDIR /app/course-service
 
-COPY package.json package-lock.json ./
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
-RUN npm install
+# Install dependencies
+RUN npm install --production
 
+# Copy the rest of the application code to the working directory
 COPY . .
 
+# Expose the port the app runs on
 EXPOSE 8082
 
-CMD ["npm", "run", "start"]
+# Command to run the application
+CMD ["node", "server.js"]
