@@ -6,7 +6,7 @@ router.post('/enroll', enrollmentController.enrollCourse);
 router.put('/enroll/:courseId/:studentId',enrollmentController.updateEnrollStatus)
 router.get('/', enrollmentController.getEnrollments);
 router.post('/students/:courseId', enrollmentController.getEnrolledStudents);
-router.post('/myCourses/', enrollmentController.getEnrolledCourses);
+router.post('/myCourses/:id', enrollmentController.getEnrolledCourses);
 router.delete('/:courseId', enrollmentController.unEnrollCourse);
 router.get('/totalenroll', enrollmentController.getEnrollmentCount)
 router.get('/enrollmentsthisweek', enrollmentController.getEnrollmentCountLastWeek)

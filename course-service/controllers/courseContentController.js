@@ -110,12 +110,12 @@ const courseContentController = {
             const courseId = req.params.id;
     
             const courseContent = await CourseContent.find({course_id: courseId});
-            console.log(courseContent)
+            
             if (!courseContent) {
                 return res.status(404).json({ error: 'Course content not found' });
             }
     
-            res.status(200).json({ courseContent });
+            res.status(200).json({ course : courseContent });
         } catch (error) {
             console.error('Error fetching course content:', error);
             res.status(500).json({ error: 'Internal server error' });
