@@ -27,7 +27,8 @@ const Header = () => {
             <li>
               <Link to='/contact'>Contact</Link>
             </li>
-            {!authState.instructor ?
+            {/* {!authState.instructor ? */}
+            {!(localStorage.getItem('instructor') === "true") ?
               <li>
                 <Link to='/teach'>Start Teach</Link>
               </li>
