@@ -20,80 +20,88 @@ const ViewCourse = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { id } = useParams();
+  const [courseContent, setCourseContent] = useState([]);
   const [course, setCourse] = useState({});
 
-  console.log(useParams())
-
-    useEffect(() => {
-      const course = async () => {
-        try {
-          const res = await axios.get(`http://localhost:8082/api/course/view`)
-          console.log(res.data)
-          console.log(res.data.course)
-        } catch (error) {
-          console.error(error)
-        }
-      }
-  }, [id]);
+      useEffect(() => {
+        const fetchCourse = async () => {
+          try {
+            const res = await axios.get(`http://localhost:8082/api/course/${id}`);
+            setCourse(res.data.course);
+            // console.log(res.data.course);
+          } catch (error) {
+            console.error(error);
+          }
+        };
+      
+        fetchCourse();
+      }, [id]);
 
       useEffect(() => {
         const courseContent = async () => {
           try {
-            const res = await axios.get(`http://localhost:8082/api/courseContent/${id}`)
-            console.log(res.data)
+            const res = await axios.get(`http://localhost:8082/api/courseContent/view/${id}`)
+            // console.log(res.data)
+            setCourseContent(res.data.courseContent)
           } catch (error) {
             console.error(error)
           }
           }
+
+          courseContent();
       }, [id]);
 
   return (
     <Box m="20px">
       <Header title={course.title} subtitle="Manage Your Course Content" />
 
-      <Accordion
-        sx={{
-          backgroundColor: colors.primary[400],
-          color: colors.grey[100],
-          position: "relative",
-          ":hover": {
-            backgroundColor: "transparent",
-          },
-        }}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
+      {courseContent && courseContent.map((content, index) => (
+        <Accordion key={index}
+          sx={{
+            backgroundColor: colors.primary[400],
+            color: colors.grey[100],
+            position: "relative",
+            ":hover": {
+              backgroundColor: "transparent",
+            },
+          }}
         >
-          Lession 1
-        </AccordionSummary>
-        <AccordionDetails>
-          <Box
-            p={2}
-            sx={{
-              backgroundColor: colors.primary[400],
-              color: colors.grey[100],
-              position: "relative",
-            }}
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
           >
-            <h1>Topic</h1>
-            <p>
-              This is a sample description. Refer the pdf below for more
-              details.
-            </p>
-            <Link href={`files/${fileName}`} target="_blank">
-              <PictureAsPdfIcon /> {fileName}
-            </Link>
-            <EditContentPopup 
-              id={id}
-              // title={title}
-              // description={description}
-            />
-          </Box>
-        </AccordionDetails>
-      </Accordion>
-      <CreateContentPopup />
+            {index + 1}
+          </AccordionSummary>
+          <AccordionDetails>
+            <Box
+              p={2}
+              sx={{
+                backgroundColor: colors.primary[400],
+                color: colors.grey[100],
+                position: "relative",
+              }}
+            >
+              <h1>{content.title}</h1>
+              <p>
+              {content.description}
+              </p>
+              <Link href={`files/${fileName}`} target="_blank">
+                <PictureAsPdfIcon /> {fileName}
+              </Link>
+              {/* <EditContentPopup 
+                id={id}
+                // title={title}
+                // description={description}
+              /> */}
+            </Box>
+          </AccordionDetails>
+        </Accordion>
+      ))}
+      
+      <CreateContentPopup 
+        courseId={id}
+      />
     </Box>
   );
 };

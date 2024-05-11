@@ -26,7 +26,3 @@ app.use('/api/courseContent',courseContentRoute)
 app.listen(8082,()=>{
     console.log("server running on port 8082.....")
 })
-
-
-
-

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   Dialog,
@@ -10,61 +10,71 @@ import {
   IconButton,
   Typography,
   Slide,
-  useTheme,
   Box,
   TextField
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTheme } from "@mui/material/styles";
 import { tokens } from "../theme";
-import { useState, useContext } from "react";
-import { AuthzContext } from "../components/Helper";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-import axios from 'axios'
-
+// Slide transition component
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CourseContentCreate() {
-
+export default function CourseContentCreate({courseId}) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [open, setOpen] = React.useState(false);
-  const { authState } = useContext(AuthzContext);
-  const [topic, setTopic] = useState();
-  const [video, setVideo] = useState();
-  const [lecture, setLecture] = useState();
-  const [assigment, setAssignment] = useState();
+  const [open, setOpen] = useState(false);
+  // const { authState } = useContext(AuthzContext);
+  const [topic, setTopic] = useState('dumba');
+  const [video, setVideo] = useState('');
+  const [lectureFile, setLectureFile] = useState(null);
+  const [assignmentFile, setAssignmentFile] = useState(null);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  // console.log(courseId);
+
+  const handleClickOpen = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
+
+  const handleLectureFileChange = (e) => setLectureFile(e.target.files[0]);
+
+  const handleAssignmentFileChange = (e) => setAssignmentFile(e.target.files[0]);
+
+  const createFormData = (fields) => {
+    const formData = new FormData();
+    Object.entries(fields).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    return formData;
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleFileUpload = async () => {
+    const formData = createFormData({
+      topic: topic,
+      video: video,
+      lecture: lectureFile,
+      assignment: assignmentFile,
+    });
 
-  const handleCreate = () => {
-    axios.post(`http://localhost:8082/api/courseContent/create/`, { 
-      instructor_id:{
-        id:authState.id, 
-        username:authState.name
-      }, 
-      title:topic, 
-      video: video, 
-      lecture: 'coursePricePer',
-      assignment:'coursePriceAll',
-    })
-      .then(response => {
-        console.log(response.data);
-        handleClose();
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
+console.log(formData.get('topic'));
+
+    try {
+      const response = await axios.post(`http://localhost:8082/api/courseContent/create/${courseId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          // 'Authorization': `Bearer ${authState.token}` // Assuming you have an auth token in authState
+        }
       });
-
-    handleClose()
-  }
+      console.log('Course content created:', response.data);
+      handleClose();
+    } catch (error) {
+      console.error('Error creating course content:', error);
+    }
+  };
 
   return (
     <Box m={5}>
@@ -88,8 +98,8 @@ export default function CourseContentCreate() {
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
-          PaperProps={{ style: { width: '80%' } }} 
           maxWidth="md"
+          fullWidth
         >
           <AppBar sx={{ position: "relative" }}>
             <Toolbar>
@@ -102,47 +112,74 @@ export default function CourseContentCreate() {
                 <CloseIcon />
               </IconButton>
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                Create course content
+                Create Course Content
               </Typography>
-              <Button autoFocus color="inherit" onClick={handleCreate}>
+              <Button autoFocus color="inherit" onClick={handleFileUpload}>
                 Add
               </Button>
             </Toolbar>
           </AppBar>
           <List>
-            <Box p={5} >
+            <Box p={5}>
               <ListItemText
                 primary="Topic"
                 secondary={
-                  <TextField label="Enter Topic" fullWidth margin="normal" value={topic} onChange={e => setTopic(e.target.value)} />
+                  <TextField
+                    label="Enter Topic"
+                    fullWidth
+                    margin="normal"
+                    value={topic}
+                    onChange={(e) => setTopic(e.target.value)}
+                  />
                 }
-                />
+              />
               <Divider />
               <ListItemText
-                primary="video"
+                primary="Video"
                 secondary={
-                  <TextField label="Paste video link" fullWidth margin="normal" value={video} onChange={e => setVideo(e.target.value)} />
+                  <TextField
+                    label="Paste Video Link"
+                    fullWidth
+                    margin="normal"
+                    value={video}
+                    onChange={(e) => setVideo(e.target.value)}
+                  />
                 }
-                />
+              />
               <Divider />
               <ListItemText
-                primary="Lecture material"
+                primary="Lecture Material"
                 secondary={
-                  <Button variant="contained" component="label">
-                    Upload File
-                    <input type="file" hidden />
-                  </Button>
+                  <>
+                    <Button variant="contained" component="label">
+                      Upload File
+                      <input
+                        type="file"
+                        onChange={handleLectureFileChange}
+                        hidden
+                      />
+                    </Button>
+                    {lectureFile ? lectureFile.name : 'No file selected'}
+                  </>
                 }
-                />
+              />
+              <Divider />
               <ListItemText
-                primary="Assigment"
+                primary="Assignment"
                 secondary={
-                  <Button variant="contained" component="label">
-                    Upload File
-                    <input type="file" hidden />
-                  </Button>
+                  <>
+                    <Button variant="contained" component="label">
+                      Upload File
+                      <input
+                        type="file"
+                        onChange={handleAssignmentFileChange}
+                        hidden
+                      />
+                    </Button>
+                    {assignmentFile ? assignmentFile.name : 'No file selected'}
+                  </>
                 }
-                />
+              />
             </Box>
           </List>
         </Dialog>
