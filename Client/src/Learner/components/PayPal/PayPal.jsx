@@ -4,8 +4,9 @@ import './paypal.css'
 import Swal from 'sweetalert2';
 import { AuthContext } from '../helpers/AuthContext';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom'
 export default function PayPal({price , title,userID,courseID}) {
+  const navigate = useNavigate()
   const { authState } = useContext(AuthContext)
     const paypal = useRef()
 
@@ -35,6 +36,7 @@ export default function PayPal({price , title,userID,courseID}) {
                     text: 'Thank you for your payment!',
                 });
                  InsertPayment('completed');
+                navigate('/leanings')
               },
               onError: (err) => {
                 // console.log(err);
