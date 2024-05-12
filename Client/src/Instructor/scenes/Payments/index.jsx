@@ -15,8 +15,8 @@ const Payment = () => {
         const response = await axios.post('http://localhost:8084/api/payment/myPayments', {
           instructor: authState.id 
         });
-        console.log(response.data.payments);
-        setPayment(response.data.payments);
+        console.log(response.data);
+        setPayment(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
       }

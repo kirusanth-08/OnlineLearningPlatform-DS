@@ -12,6 +12,7 @@ import { ColorModeContext, useMode } from "./theme";
 import ViewCourse from "./scenes/Courses/ViewCourse";
 import EditCourse from "./scenes/Courses/EditCourse";
 import {AuthzContext} from "./components/Helper";
+import './instructor.css';
 
 function InstructorApp() {
   const [theme, colorMode] = useMode();
