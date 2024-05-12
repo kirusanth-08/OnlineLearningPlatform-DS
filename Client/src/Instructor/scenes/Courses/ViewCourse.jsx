@@ -105,9 +105,9 @@ const ViewCourse = () => {
                           },
                         }}
                       >
-                        <Link to={content.lecture.path}>
+                        <a href={`http://localhost:8082/file/${content.lecture.path}`}>
                           {content.lecture.filename}
-                        </Link>
+                        </a>
                       </Button>
                     )}
                     {content.assignment && (
@@ -124,9 +124,10 @@ const ViewCourse = () => {
                           },
                         }}
                       >
-                        <Link to={content.assignment.path}>
+                        
+                        <a href={`http://localhost:8082/file/${content.assignment.path}`}>
                           {content.assignment.filename}
-                        </Link>
+                        </a>
                       </Button>
                     )}
                     {/* <EditContentPopup 

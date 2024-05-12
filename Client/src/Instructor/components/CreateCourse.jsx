@@ -74,17 +74,17 @@ export default function CreateCourse() {
         <Button
           variant="outlined"
           onClick={handleClickOpen}
+          color="secondary"
           sx={{
-            backgroundColor: colors.greenAccent[400],
-            color: colors.grey[100],
             position: "absolute",
             top: 50,
             right: 0,
           }}
         >
-          <AddCircleOutlineIcon />
+        <AddCircleOutlineIcon />
         </Button>
         <Dialog
+        
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
