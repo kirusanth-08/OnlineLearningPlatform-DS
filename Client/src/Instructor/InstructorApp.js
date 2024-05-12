@@ -5,13 +5,13 @@ import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import Courses from "./scenes/Courses";
 import Payments from "./scenes/Payments";
-import Form from "./scenes/form";
 import FAQ from "./scenes/faq";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import ViewCourse from "./scenes/Courses/ViewCourse";
 import EditCourse from "./scenes/Courses/EditCourse";
 import {AuthzContext} from "./components/Helper";
+import './instructor.css';
 
 function InstructorApp() {
   const [theme, colorMode] = useMode();
@@ -38,7 +38,6 @@ function InstructorApp() {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/courses" element={<Courses />} />
                 <Route path="/payments" element={<Payments />} />
-                <Route path="/form" element={<Form />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/course/:id" element={<ViewCourse />} />
                 <Route path="/modifycourse/:id" element={<EditCourse />} />

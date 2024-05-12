@@ -28,7 +28,7 @@ const Courses = () => {
     };
     fetchCourses();
   }, []);
-  console.log(courses)
+  // console.log(courses)
 
   return (
     <Box m="20px"

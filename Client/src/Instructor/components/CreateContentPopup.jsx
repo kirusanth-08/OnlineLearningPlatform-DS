@@ -28,8 +28,7 @@ export default function CourseContentCreate({courseId}) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [open, setOpen] = useState(false);
-  // const { authState } = useContext(AuthzContext);
-  const [topic, setTopic] = useState('dumba');
+  const [topic, setTopic] = useState('');
   const [video, setVideo] = useState('');
   const [lectureFile, setLectureFile] = useState(null);
   const [assignmentFile, setAssignmentFile] = useState(null);
@@ -46,11 +45,17 @@ export default function CourseContentCreate({courseId}) {
 
   const createFormData = (fields) => {
     const formData = new FormData();
+    // Append topic value explicitly
+    formData.append('topic', fields.topic);
+    // Append other fields
     Object.entries(fields).forEach(([key, value]) => {
-      formData.append(key, value);
+      if (key !== 'topic') {
+        formData.append(key, value);
+      }
     });
     return formData;
   };
+  
 
   const handleFileUpload = async () => {
     const formData = createFormData({

@@ -1,4 +1,5 @@
 const Payment = require('../models/Payment');
+const Course = require('../models/Course');
 
 const paymentController = {
   createPayment: async (req, res) => {
@@ -7,8 +8,6 @@ const paymentController = {
     const alreadyCompleted = await Payment.find({course_id:req.body.course_id, user:req.body.user})
     
     if(alreadyCompleted.length>0)  return res.json({message : 'already purchased'})
-
-
 
     const newPayment = new Payment(req.body);
       const savedPayment = await newPayment.save();
@@ -61,25 +60,18 @@ const paymentController = {
 
   getMyPayments: async (req, res) => {
     try {
-      const instructorId = req.body.instructor;
-      console.log(instructorId)
-      const payments = await Payment.find().populate({
-        path: 'course_id',
-        match: { instructor_id: instructorId },
-      });
-
-      console.log(payments[0].course_id.instructor_id)
-      // console.log(payments)
-
-      // Filter out payments where course_id is null (i.e., instructor_id didn't match)
-      // const filteredPayments = payments.filter(payment => payment.course_id !== null);
-      // console.log(filteredPayments)
-
-      res.status(200).json(payments);
+        const instructorId = req.body.instructor;
+        // console.log(instructorId);
+        let payments = await Payment.find().populate('course_id');
+        // console.log(payments);
+        payments = payments.filter(payment => payment.course_id.instructor_id.id == instructorId);
+        // console.log(payments);
+        res.status(200).json(payments);
     } catch (err) {
-      res.status(500).json({error : err});
+        console.error(err);
+        res.status(500).json({ error: err });
     }
-  }
+}
 }
 
 module.exports = paymentController;

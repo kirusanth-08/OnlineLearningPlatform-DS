@@ -5,7 +5,7 @@ const courseContentController = require('../controllers/courseContentController'
 const router = express.Router();
 
 // Create a new course content entry
-router.post('/create', courseContentController.createCourseContent);
+router.post('/create/:courseId', courseContentController.createCourseContent);
 
 // Update an existing course content entry
 // router.put('/update/:id', courseContentController.updateCourseContent);

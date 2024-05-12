@@ -69,7 +69,6 @@ const enrollmentController = {
         }
     },
     
-
     unEnrollCourse: async (req, res) => {
         // res.send('unEnrolled')
         try {
@@ -120,16 +119,6 @@ const enrollmentController = {
             res.status(500).json({ message: error.message });
         }
     },
-
-//     enrolledCourses: async (req, res) => {
-//     try {
-//         const enrollments = await Enrollment.find({ user_id: req.params.studentId });
-//         const courseIds = enrollments.map(enrollment => enrollment.course_id);
-//         res.json(courseIds);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// }
 };
 
 module.exports = enrollmentController;

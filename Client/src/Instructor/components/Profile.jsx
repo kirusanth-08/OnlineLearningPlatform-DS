@@ -12,7 +12,7 @@ import Swal from 'sweetalert2'
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from 'react-router-dom';
 
-export default function Profile() {
+export default function Profile({name}) {
   const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -78,7 +78,7 @@ export default function Profile() {
                 <ListItemIcon>
                   <PersonOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Profile" />
+                <ListItemText primary={name} />
               </ListItemButton>
             </ListItem>
           </List>

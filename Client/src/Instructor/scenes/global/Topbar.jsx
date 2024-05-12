@@ -7,11 +7,29 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import Badge from "@mui/material/Badge";
 import Profile from "../../components/Profile";
 import { Link } from "react-router-dom";
+import { AuthzContext } from '../../components/Helper'
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const { authState } = useContext(AuthzContext);
+  // const [notifications, setNotifications] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchNotifications = async () => {
+  //     try {
+  //       const response = await axios.post('http://localhost:8082/api/notifications/myCourses/', {
+  //         instructor_id: authState.id
+  //       });
+  //       setCourses(response.data.notifications);
+  //     } catch (error) {
+  //       console.error('Failed to fetch courses:', error);
+  //     }
+  //   };
+  //   fetchNotifications();
+  // }, []);
+
 
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -42,7 +60,16 @@ const Topbar = () => {
     <Box display="flex" justifyContent="end" p={2}>
       {/* ICONS */}
       <Box display="flex">
-        <Link to="/"> Learner</Link>
+        <Link to="/"
+          style={{
+            // color: colors.grey[800],
+            marginRight: "10px",
+            fontSize: "1rem",
+            fontWeight: 500,
+            alignContent: "center",
+            padding: "5px",
+          }}
+        > Learner</Link>
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
@@ -121,7 +148,7 @@ const Topbar = () => {
           </div>
         )}
         <IconButton>
-          <Profile />
+          <Profile name={authState.name}/>
         </IconButton>
       </Box>
     </Box>

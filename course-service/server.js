@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const app = express() 
 const dotenv = require('dotenv')
 const cors = require('cors')
+const path = require('path');
 dotenv.config();
 
 const courseRoute = require('./routes/course')
@@ -14,6 +15,8 @@ con.on('open',()=>{
     console.log('mongoDB connected.....')
 })
 
+// Serve static files from the 'uploads' directory
+app.use('/file', express.static(path.join(__dirname, '/')));
 
 //Middelware 
 app.use(express.json())
