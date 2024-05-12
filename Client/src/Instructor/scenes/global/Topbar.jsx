@@ -14,6 +14,22 @@ const Topbar = () => {
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
   const { authState } = useContext(AuthzContext);
+  // const [notifications, setNotifications] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchNotifications = async () => {
+  //     try {
+  //       const response = await axios.post('http://localhost:8082/api/notifications/myCourses/', {
+  //         instructor_id: authState.id
+  //       });
+  //       setCourses(response.data.notifications);
+  //     } catch (error) {
+  //       console.error('Failed to fetch courses:', error);
+  //     }
+  //   };
+  //   fetchNotifications();
+  // }, []);
+
 
   const [showNotifications, setShowNotifications] = useState(false);
 
