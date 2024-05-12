@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  notification-service:
+    image: notification-service:latest
+    ports:
+      - "8088:8088"
+
+  enrollment-service:
+    image: enrollment-service:latest
+    ports:
+      - "8085:8085"
+
+  user-service:
+    image: user-service:latest
+    ports:
+      - "8080:8080"
+
+  course-service:
+    image: course-service:latest
+    ports:
+      - "8082:8082"
+
+  payment-service:
+    image: payment-service:latest
+    ports:
+      - "8084:8084"
