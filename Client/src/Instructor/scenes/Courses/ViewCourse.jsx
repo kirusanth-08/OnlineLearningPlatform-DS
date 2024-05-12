@@ -41,7 +41,7 @@ const ViewCourse = () => {
         if (contentRes.data.error) {
           console.log(contentRes.data.error);
         } else {
-          setCourseContent(contentRes.data.courseContent);
+          setCourseContent(contentRes.data.course);
         }
       } catch (error) {
         console.error(error);

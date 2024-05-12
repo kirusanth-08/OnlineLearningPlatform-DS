@@ -61,11 +61,11 @@ const paymentController = {
   getMyPayments: async (req, res) => {
     try {
         const instructorId = req.body.instructor;
-        console.log(instructorId);
+        // console.log(instructorId);
         let payments = await Payment.find().populate('course_id');
         // console.log(payments);
         payments = payments.filter(payment => payment.course_id.instructor_id.id == instructorId);
-        console.log(payments);
+        // console.log(payments);
         res.status(200).json(payments);
     } catch (err) {
         console.error(err);
