@@ -27,8 +27,15 @@ const ViewCourse = () => {
         const fetchCourse = async () => {
           try {
             const res = await axios.get(`http://localhost:8082/api/course/${id}`);
-            setCourse(res.data.course);
-            // console.log(res.data.course);
+            if(res.data.error){
+              console.log(res.data.error)
+            }else{
+              setCourse(res.data.course);
+              axios.get(`http://localhost:8082/api/courseContent/view/${id}`).then((res)=>{
+                setCourseContent(res.data.courseContent)
+              }).catch((err)=> console.log(err))
+            }
+            // console.log(id);
           } catch (error) {
             console.error(error);
           }
@@ -37,19 +44,19 @@ const ViewCourse = () => {
         fetchCourse();
       }, [id]);
 
-      useEffect(() => {
-        const courseContent = async () => {
-          try {
-            const res = await axios.get(`http://localhost:8082/api/courseContent/view/${id}`)
-            // console.log(res.data)
-            setCourseContent(res.data.courseContent)
-          } catch (error) {
-            console.error(error)
-          }
-          }
+      // useEffect(() => {
+      //   const courseContent = async () => {
+      //     try {
+      //       const res = await axios.get(`http://localhost:8082/api/courseContent/view/${id}`)
+      //       // console.log(res.data)
+      //       setCourseContent(res.data.courseContent)
+      //     } catch (error) {
+      //       console.error(error)
+      //     }
+      //     }
 
-          courseContent();
-      }, [id]);
+      //     courseContent();
+      // }, [id]);
 
   return (
     <Box m="20px">

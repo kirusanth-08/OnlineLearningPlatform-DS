@@ -116,6 +116,7 @@ const courseContentController = {
             }
     
             res.status(200).json({ course : courseContent });
+
         } catch (error) {
             console.error('Error fetching course content:', error);
             res.status(500).json({ error: 'Internal server error' });
