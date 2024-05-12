@@ -18,7 +18,7 @@ const MyLearning = () => {
             if (res.data.error) {
                 console.log(res.data.error)
             } else {
-                // console.log(res.data.user._id)
+                 console.log('id=>'+res.data.user._id)
                 axios.post(`http://localhost:8085/api/enrollments/myCourses/${res.data.user._id}`).then((res)=>{
                         if(res.data.error){
                             console.log(res.data.error)
@@ -31,9 +31,9 @@ const MyLearning = () => {
                                     setContent(res.data.course)
                                 }
                                 
-                            })
+                            }).catch((err)=>console.log(err))
                         }
-                })
+                }).catch((err)=>console.log(err))
                 
                 // console.log(res.data.user)
                 // axios.get('http://localhost:8082/api/courseContent/').then((res) => {
@@ -68,14 +68,16 @@ const MyLearning = () => {
         <>
             <Back title={'MY LEARNINGS'} />
             <div className='learningContainer'>
+             
                 <ul className="accordion">
                     {content.map((course, index) => (
                         <li key={index} className='accordianLi'>
 
 
-
+  
 
                             <input type="radio" name="accordion" id={`${course._id}`} />
+                            
                             <label htmlFor={`${course._id}`} className='labelss'>{course.topic}</label>
                             <div className="content">
                                 
