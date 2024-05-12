@@ -59,11 +59,13 @@ const enrollmentController = {
 
     getEnrolledCourses: async (req, res) => {
         try {
-            const enrollments = await Enrollment.find({ user_id: req.body.userId });
+            // console.log(req.params.id)
+            const enrollments = await Enrollment.find({ user_id: req.params.id });
+          
             const courseIds = enrollments.map(enrollment => enrollment.course_id);
-            res.json(courseIds);
+            res.json({message : courseIds});
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ error: error.message });
         }
     },
     
@@ -71,10 +73,13 @@ const enrollmentController = {
     unEnrollCourse: async (req, res) => {
         // res.send('unEnrolled')
         try {
-            await Enrollment.findByIdAndDelete(req.params.id);
+            console.log(req.body); // Ensure you're receiving the data correctly
+            const { user_id, course_id } = req.body;
+           
+            await Enrollment.findOneAndDelete({ user_id, course_id });
             res.json({ message: 'Deleted Enrollment' });
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ error: error.message });
         }
     },
 
