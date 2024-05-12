@@ -24,10 +24,21 @@ const CourseView = ({ _id, title, description, isApproved }) => {
         }}
       >
         <CardContent>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h3" component="h2"
+            sx={{ marginBottom: theme.spacing(1) }}
+          >
             {title}
           </Typography>
-          <Typography color="textSecondary">{description}</Typography>
+          <Typography 
+            component="p" 
+            sx={{ 
+              marginBottom: theme.spacing(1),
+              color: colors.grey[300],
+              width: "80%",
+             }}
+          >
+            {description}
+          </Typography>
           <Typography
             variant="body2"
             component="p"

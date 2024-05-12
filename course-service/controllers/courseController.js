@@ -141,7 +141,7 @@ const courseController = {
     viewInstructorCourse: async (req, res) => {
         try {
             const instructorId = req.body.instructor_id;
-            console.log(instructorId)
+            // console.log(instructorId)
             const courses = await Course.find({'instructor_id.id' : instructorId});
             res.json({ courses });
         } catch (error) {

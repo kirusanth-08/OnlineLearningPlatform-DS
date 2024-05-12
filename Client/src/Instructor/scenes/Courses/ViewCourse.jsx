@@ -10,105 +10,138 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { tokens } from "../../theme";
 import CreateContentPopup from "../../components/CreateContentPopup";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { Link } from "react-router-dom";
 import EditContentPopup from "../../components/EditContentPopup";
 import CreateCourse from "../../components/CreateCourse";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import FilePresentIcon from "@mui/icons-material/FilePresent";
 
 const ViewCourse = () => {
-  const fileName = "pdf1.pdf";
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { id } = useParams();
   const [courseContent, setCourseContent] = useState([]);
   const [course, setCourse] = useState({});
 
-      useEffect(() => {
-        const fetchCourse = async () => {
-          try {
-            const res = await axios.get(`http://localhost:8082/api/course/${id}`);
-            if(res.data.error){
-              console.log(res.data.error)
-            }else{
-              setCourse(res.data.course);
-              axios.get(`http://localhost:8082/api/courseContent/view/${id}`).then((res)=>{
-                setCourseContent(res.data.courseContent)
-              }).catch((err)=> console.log(err))
-            }
-            // console.log(id);
-          } catch (error) {
-            console.error(error);
-          }
-        };
-      
-        fetchCourse();
-      }, [id]);
+  useEffect(() => {
+    const fetchCourseAndContent = async () => {
+      try {
+        const courseRes = await axios.get(
+          `http://localhost:8082/api/course/${id}`
+        );
+        if (courseRes.data.error) {
+          console.log(courseRes.data.error);
+        } else {
+          setCourse(courseRes.data.course);
+        }
 
-      // useEffect(() => {
-      //   const courseContent = async () => {
-      //     try {
-      //       const res = await axios.get(`http://localhost:8082/api/courseContent/view/${id}`)
-      //       // console.log(res.data)
-      //       setCourseContent(res.data.courseContent)
-      //     } catch (error) {
-      //       console.error(error)
-      //     }
-      //     }
+        const contentRes = await axios.get(
+          `http://localhost:8082/api/courseContent/view/${id}`
+        );
+        if (contentRes.data.error) {
+          console.log(contentRes.data.error);
+        } else {
+          setCourseContent(contentRes.data.courseContent);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-      //     courseContent();
-      // }, [id]);
+    fetchCourseAndContent();
+  }, [id]);
 
   return (
     <Box m="20px">
       <Header title={course.title} subtitle="Manage Your Course Content" />
 
-      {courseContent && courseContent.map((content, index) => (
-        <Accordion key={index}
-          sx={{
-            backgroundColor: colors.primary[400],
-            color: colors.grey[100],
-            position: "relative",
-            ":hover": {
-              backgroundColor: "transparent",
-            },
-          }}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            {index + 1}
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box
-              p={2}
-              sx={{
-                backgroundColor: colors.primary[400],
-                color: colors.grey[100],
-                position: "relative",
-              }}
-            >
-              <h1>{content.title}</h1>
-              <p>
-              {content.description}
-              </p>
-              <Link href={`files/${fileName}`} target="_blank">
-                <PictureAsPdfIcon /> {fileName}
-              </Link>
-              {/* <EditContentPopup 
+      {courseContent &&
+        courseContent.map(
+          (content, index) => (
+            (
+              <Accordion
+                key={index}
+                sx={{
+                  backgroundColor: colors.primary[400],
+                  color: colors.grey[100],
+                  position: "relative",
+                  ":hover": {
+                    backgroundColor: "transparent",
+                  },
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                >
+                  Lession {index + 1}
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Box
+                    p={2}
+                    sx={{
+                      backgroundColor: colors.primary[400],
+                      color: colors.grey[100],
+                      position: "relative",
+                    }}
+                  >
+                    <h1>{content.topic}</h1>
+                    <p>
+                      <AttachFileIcon />
+                      <Link to={content.video}>{content.video}</Link>
+                    </p>
+                    {content.lecture && (
+                      <Button
+                        variant="outlined"
+                        startIcon={<FilePresentIcon />}
+                        sx={{
+                          backgroundColor: colors.primary[400],
+                          color: colors.grey[100],
+                          position: "relative",
+                          ":hover": {
+                            color: "white",
+                            backgroundColor: colors.primary[500],
+                          },
+                        }}
+                      >
+                        <Link to={content.lecture.path}>
+                          {content.lecture.filename}
+                        </Link>
+                      </Button>
+                    )}
+                    {content.assignment && (
+                      <Button
+                        variant="outlined"
+                        startIcon={<FilePresentIcon />}
+                        sx={{
+                          backgroundColor: colors.primary[400],
+                          color: colors.grey[100],
+                          position: "relative",
+                          ":hover": {
+                            color: "white",
+                            backgroundColor: colors.primary[500],
+                          },
+                        }}
+                      >
+                        <Link to={content.assignment.path}>
+                          {content.assignment.filename}
+                        </Link>
+                      </Button>
+                    )}
+                    {/* <EditContentPopup 
                 id={id}
                 // title={title}
                 // description={description}
               /> */}
-            </Box>
-          </AccordionDetails>
-        </Accordion>
-      ))}
-      
-      <CreateContentPopup 
-        courseId={id}
-      />
+                  </Box>
+                </AccordionDetails>
+              </Accordion>
+            )
+          )
+        )}
+
+      <CreateContentPopup courseId={id} />
     </Box>
   );
 };
