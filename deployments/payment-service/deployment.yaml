@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: course-service
+  name: payment-service
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: course-service
+      app: payment-service
   template:
     metadata:
       labels:
-        app: course-service
+        app: payment-service
     spec:
       containers:
-      - name: course-service
-        image: course-service:latest
+      - name: payment-service
+        image: payment-service:latest
         ports:
         - containerPort: 8080
