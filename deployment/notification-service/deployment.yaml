@@ -16,4 +16,4 @@ spec:
       - name: notification-service
         image: notification-service:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8088

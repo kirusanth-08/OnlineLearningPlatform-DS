@@ -16,4 +16,4 @@ spec:
       - name: payment-service
         image: payment-service:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8084

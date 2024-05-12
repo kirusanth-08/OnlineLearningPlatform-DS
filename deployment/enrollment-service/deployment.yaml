@@ -16,4 +16,4 @@ spec:
       - name: enrollment-service
         image: enrollment-service:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8085
