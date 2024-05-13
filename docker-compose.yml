@@ -2,26 +2,36 @@ version: '3'
 
 services:
   notification-service:
-    image: notification-service:latest
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
     ports:
       - "8088:8088"
 
   enrollment-service:
-    image: enrollment-service:latest
+    build:
+      context: ./enrollment-service
+      dockerfile: Dockerfile
     ports:
       - "8085:8085"
 
   user-service:
-    image: user-service:latest
+    build:
+      context: ./User_Service
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
 
   course-service:
-    image: course-service:latest
+    build:
+      context: ./course-service
+      dockerfile: Dockerfile
     ports:
       - "8082:8082"
 
   payment-service:
-    image: payment-service:latest
+    build:
+      context: ./payment-service
+      dockerfile: Dockerfile
     ports:
       - "8084:8084"
